@@ -1,11 +1,19 @@
 # Network
 Develop AI-driven tools that improve decentralized network performance and scalability.
 
+
 Project containing couples of microservices, which may be deployed via Docker or Kubernetes
 
 Instalation:
 
 pip install -r requirements.txt
+
+5G Network optimizatoin
+id, scenario, description, label, estimated_throughput_increase
+
+https://huggingface.co/datasets/infinite-dataset-hub/5GNetworkOptimization?row=44
+
+export DJANGO_SETTINGS_MODULE=Network.settings
 
 
 # Time Series predictive algorithm
@@ -93,3 +101,31 @@ Logs (Prometheus/Grafana) (?)
 
 brew install confluentinc/tap/ccloud-cli
 brew install confluentinc/tap/confluent-platform
+
+
+1. brew install prometheus
+
+2. prometheus --config.file=/opt/homebrew/etc/prometheus.yml
+
+Prometheus: http://localhost:9090/query
+
+Kafka (server_properties)
+
+advertised.listeners=PLAINTEXT://localhost:9092,CONTROLLER://localhost:9093 -> advertised.listeners=PLAINTEXT://host.docker.internal:9092,CONTROLLER://host.docker.internal:9093
+
+
+Kafka Exporter
+(Kafka outside of docker lol)
+#   -e KAFKA_SERVER=localhost:9092 \
+docker run -ti --rm -p 9308:9308 danielqsj/kafka-exporter --kafka.server=host.docker.internal:9092 
+
+
+Kafka_Exporter: http://localhost:9308/metrics
+
+
+brew install grafana
+brew services start grafana
+
+Grafana: http://localhost:3000
+
+grafana.com

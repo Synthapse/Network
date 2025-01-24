@@ -2,7 +2,11 @@ import traceback
 from GNN.Graph.graph_generator import generate_nepal_graph
 from confluent_kafka import Producer, Consumer, KafkaError
 import json
+from ISP.NetworkPlan import NetworkProvider
 import re
+
+# Needs to improve that Kafka - cause seems - like there is too much consumers/producers
+# probbaby not well solution
 
 #Producer: This sends messages to a Kafka topic.
 # Consumer: This receives messages from a Kafka topic.
@@ -11,7 +15,7 @@ kafka_broker_address = "localhost:9092"
 
 # Each node can be a Kafka producer (sending messages) and consumer (receiving messages)
 class NetworkPoint:
-    def __init__(self, id, mb_usage_last_quarter, mb_available, bandwidth, latency):
+    def __init__(self, id, mb_usage_last_quarter, mb_available, bandwidth, latency, is_5g_enabled=False):
         """
         Initialize the NetworkPoint with essential properties.
 
@@ -27,6 +31,11 @@ class NetworkPoint:
         self.bandwidth = bandwidth  # Bandwidth in Mbps
         self.latency = latency  # Latency in ms
         self.neighbors = []  # List of neighbors (to be managed by NetworkX graph)
+
+        self.is_5g_enabled = is_5g_enabled
+        if self.is_5g_enabled:
+            self.bandwidth = 10000  # Example: 10 Gbps for 5G-enabled node
+            self.latency = 1  # Example: 1 ms latency for 5G-enabled node
 
         self.producer = self.create_producer()
         self.consumer = self.create_consumer()
@@ -153,23 +162,12 @@ class NetworkPoint:
 
 
 # Function to add properties to the nodes of an existing NetworkX graph
-def add_properties_to_existing_graph(G):
+def define_neighbors_tribes(G):
     """
     Add data usage, bandwidth, and latency properties to each node of the existing graph.
-
     :param G: The NetworkX graph to update.
     """
     # Iterate through each node and add properties (e.g., random values for this example)
-    for id in G.nodes():
-        # Here you can decide how to assign properties (e.g., based on id or other logic)
-        mb_available = 250
-        mb_usage_last_quarter = 50  # Example data usage in GB
-        bandwidth = 100  # Example bandwidth in Mbps
-        latency = 10  # Example latency in ms
-
-        # Create a NetworkPoint instance and store it in the node's 'data' attribute
-        G.nodes[id]['data'] = NetworkPoint(id, mb_usage_last_quarter, mb_available, bandwidth, latency)
-
     # Now define neighbors based on the edges in the graph
     for id in G.nodes():
         node_data = G.nodes[id]['data']
@@ -181,10 +179,16 @@ def add_properties_to_existing_graph(G):
 
 def seed_network_nodes():
     try:
+        # there are also another countries...
         nepal_graph = generate_nepal_graph()
-
         # Add properties to the graph's nodes
-        add_properties_to_existing_graph(nepal_graph)
+        network_provider = NetworkProvider()
+        network_provider.charge_network(nepal_graph)
+        # Extra load the: Kapilavastu (5th province) -> E3 point
+        network_provider.charge_single_point(nepal_graph, "E3")
+        define_neighbors_tribes(nepal_graph)
+
+
 
         # Display the details of all nodes
         # Sending messages
@@ -196,7 +200,8 @@ def seed_network_nodes():
             print(f"Node ID: {node_id}")
             print(f"Node Data: {node_data}")
             if 'data' in node_data:
-                print(f"Data Usage: {node_data['data'].mb_usage_last_quarter} GB")
+                print(f"Mb Available: {node_data['data'].mb_available} GB")
+                print(f"Data usage: {node_data['data'].mb_usage_last_quarter} Mb usage last 15 minutes")
                 print(f"Bandwidth: {node_data['data'].bandwidth} Mbps")
                 print(f"Latency: {node_data['data'].latency} ms")
             print("---------")

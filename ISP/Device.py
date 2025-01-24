@@ -12,7 +12,10 @@ class UserDevice:
         self.name = name  # Interface name (e.g., eth0, wlan0)
         self.interface_type = interface_type  # Ethernet, Wi-Fi, etc.
         self.parent_node = parent_node
-        self.producer = Producer({'bootstrap.servers': kafka_broker_address})
+        self.producer = Producer({
+                'bootstrap.servers': kafka_broker_address,
+                'client.id': f'device_{self.id}'
+             })
         self.consumer = Consumer({
             'bootstrap.servers': kafka_broker_address,
             'group.id': f'group_{self.id}',
@@ -38,7 +41,7 @@ class UserDevice:
     def start_sending_claims(self):
         """Periodically send claims every 1 minute."""
         self.send_data_claim(20)
-        time.sleep(60)  # Wait for 1 minute before sending the next claim
+        time.sleep(5)  # Wait for 5 sec before sending the next claim
 
     def listen_for_response(self):
         # Subscribe to the unique response topic
@@ -58,40 +61,30 @@ class UserDevice:
             print(f"Device {self.device_id} received response: {response}")
 
 def simulate_device_traffic():
-    devices = [
-        UserDevice(
-            id = "1",
-            name="eth0",
-            interface_type="Ethernet",
-            parent_node ="Kathmandu"
-        ),
-        UserDevice(
-            id = "2",
-            name="wlan0",
-            interface_type="Wi-Fi",
-            parent_node = "Kathmandu",
-        ),
-        UserDevice(
-            id = "3",
-            name="lo",
-            interface_type="Loopback",
-            parent_node="Kathmandu",
-        ),
-        UserDevice(
-            id = "4",
-            name="vpn0",
-            interface_type="VPN",
+    devices = []
+
+    # Create 1000 devices (which comunicate with single node...)
+    for i in range(1, 1001):
+
+        id = i
+        device = UserDevice(
+            id=str(id),  # Device id is a string of the form "1", "2", ..., "1000"
+            name=f"device{i}",  # Dynamic name like "device1", "device2", ..., "device1000"
+            interface_type="Ethernet" if i % 2 == 0 else "Wi-Fi",  # Alternate between Ethernet and Wi-Fi
             parent_node="Kathmandu"
         )
-    ]
+        devices.append(device)
 
+    print(devices)
     # Start the sending process for each device in a separate thread
+    threads = []
     threads = []
     for device in devices:
         thread = threading.Thread(target=device.start_sending_claims)
+        thread.daemon = True  # Make the thread a daemon so it doesn't block the main program exit
         thread.start()
         threads.append(thread)
 
-    # Join threads to keep the main process alive
-    for thread in threads:
-        thread.join()
+    # Instead of joining threads here, just keep the program alive.
+    while True:
+        time.sleep(60)  # The main thread will sleep forever so that all threads keep running
