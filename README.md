@@ -51,6 +51,9 @@ bin/kafka-server-stop.sh
 bin/zookeeper-server-stop.sh
 
 
+CLEANUP KAFKA:
+
+
 lsof -i :9092
 kill -9 <PID>
 
@@ -81,8 +84,8 @@ from Kathmandu topics (each node send data to neighbors):
 - node_Janakpur_messages
 
 All mesages from begining (for particular topic):
-bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic node_Gandaki_messages --from-beginning
 
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic node_Gandaki_messages --from-beginning
 
 KAFKA UI
 

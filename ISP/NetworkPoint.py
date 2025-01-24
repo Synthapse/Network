@@ -1,6 +1,8 @@
 import traceback
 from GNN.Graph.graph_generator import generate_nepal_graph
 from confluent_kafka import Producer, Consumer, KafkaError
+import json
+import re
 
 #Producer: This sends messages to a Kafka topic.
 # Consumer: This receives messages from a Kafka topic.
@@ -9,19 +11,19 @@ kafka_broker_address = "localhost:9092"
 
 # Each node can be a Kafka producer (sending messages) and consumer (receiving messages)
 class NetworkPoint:
-    def __init__(self, id, data_usage, bandwidth, latency):
+    def __init__(self, id, mb_usage_last_quarter, mb_available, bandwidth, latency):
         """
         Initialize the NetworkPoint with essential properties.
 
-        :param data_usage: Amount of data used by this node (e.g., in GB).
+        :param mb_usage_last_quarter: Amount of data used by this node (e.g., in GB).
         :param bandwidth: The available bandwidth (e.g., in Mbps).
         :param latency: Latency to neighbors (e.g., in ms).
         """
 
-
         self.id = id
         # redefine if those data per node is ok
-        self.data_usage = data_usage  # Data usage in GB
+        self.mb_usage_last_quarter = mb_usage_last_quarter  # Data usage in MB (usage)
+        self.mb_available = mb_available
         self.bandwidth = bandwidth  # Bandwidth in Mbps
         self.latency = latency  # Latency in ms
         self.neighbors = []  # List of neighbors (to be managed by NetworkX graph)
@@ -37,6 +39,13 @@ class NetworkPoint:
         }
         print(f"Added Kafka producer with id {self.id}")
         return Producer(config)
+
+    def can_provide_data(self, amount_mb):
+        """Decision logic to evaluate the claim."""
+        # Example: Total available bandwidth in MB
+        # (It's depends on the network)
+        return amount_mb <= self.mb_available
+
 
     def create_consumer(self):
         """Create a Kafka consumer for the node."""
@@ -57,20 +66,64 @@ class NetworkPoint:
         self.producer.flush()
         print(f"Node {self.id} sent message to Node {neighbor_id}: {message}")
 
+
+    # divide into 2 ways
+    # consume from devices
+    # consume from other nodes in the network
     def consume_messages(self):
-        """Consume messages from Kafka for this node."""
-        while True:
-            msg = self.consumer.poll(timeout=1.0)  # Adjust timeout as needed
-            if msg is None:
-                continue
-            if msg.error():
-                if msg.error().code() == KafkaError._PARTITION_EOF:
+        """Listen for claims and respond accordingly."""
+        try:
+            while True:
+                message = self.consumer.poll(1.0)  # Poll messages with a timeout
+                if message is None:
                     continue
+                if message.error():
+                    print(f"Consumer error: {message.error()}")
+                    continue
+
+                # Preprocess: Convert single quotes to double quotes for keys
+                json_message = None
+                claim = message.value()
+                if isinstance(claim, bytes):
+                    message_value = claim.decode('utf-8')  # Decode bytes to string
+                    try:
+                        # Preprocess: Replace single quotes with double quotes
+                        if message_value.startswith("{") and "'" in message_value:
+                            message_value = message_value.replace("'", '"')
+
+                        # Attempt to parse the JSON string
+                        json_message = json.loads(message_value)
+                    except json.JSONDecodeError as e:
+                        print(f"Failed to decode JSON: {e}")
+                        print(f"Received invalid JSON string: {message_value}")
+                print(f"Node {self.id} received claim: {json_message}")
+
+                # Evaluate the claim and prepare a response
+                if self.can_provide_data(json_message["amount_mb"]):
+
+                    self.mb_available -= json_message["amount_mb"]
+                    response = {
+                        "status": "approved",
+                        "node_id": self.id,
+                        "data_granted_mb": json_message["amount_mb"],
+                    }
                 else:
-                    print(f"Consumer error: {msg.error()}")
-                    break
-            else:
-                print(f"Node {self.id} received message: {msg.value().decode('utf-8')}")
+                    response = {
+                        "status": "denied",
+                        "node_id": self.id,
+                        "reason": "Insufficient resources"
+                    }
+
+                # Send the response to the appropriate topic
+                device_id = json_message["device_id"]
+                response_topic = f'responses_{device_id}'
+                self.producer.produce(response_topic, value=json.dumps(response).encode('utf-8'))
+                self.producer.flush()
+                print(f"Node {self.id} sent response: {response} to {response_topic} Transfer Left: {self.mb_available}")
+        except KeyboardInterrupt:
+            print("Consumer stopped.")
+        finally:
+            self.consumer.close()
 
     def add_neighbor(self, neighbor):
         """
@@ -87,7 +140,7 @@ class NetworkPoint:
 
         :return: A string summary of the node's properties.
         """
-        return f"Data Usage = {self.data_usage} GB, Bandwidth = {self.bandwidth} Mbps, " \
+        return f"Data Usage = {self.mb_usage_last_quarter} MB, Available Data[MB] = {self.mb_available} Bandwidth = {self.bandwidth} Mbps, " \
                f"Latency = {self.latency} ms, Neighbors = {len(self.neighbors)}"
 
     def update_usage(self, additional_usage):
@@ -96,7 +149,7 @@ class NetworkPoint:
 
         :param additional_usage: Amount of additional data used by the node (e.g., in GB).
         """
-        self.data_usage += additional_usage
+        self.mb_usage_last_quarter += additional_usage
 
 
 # Function to add properties to the nodes of an existing NetworkX graph
@@ -109,12 +162,13 @@ def add_properties_to_existing_graph(G):
     # Iterate through each node and add properties (e.g., random values for this example)
     for id in G.nodes():
         # Here you can decide how to assign properties (e.g., based on id or other logic)
-        data_usage = 50  # Example data usage in GB
+        mb_available = 250
+        mb_usage_last_quarter = 50  # Example data usage in GB
         bandwidth = 100  # Example bandwidth in Mbps
         latency = 10  # Example latency in ms
 
         # Create a NetworkPoint instance and store it in the node's 'data' attribute
-        G.nodes[id]['data'] = NetworkPoint(id, data_usage, bandwidth, latency)
+        G.nodes[id]['data'] = NetworkPoint(id, mb_usage_last_quarter, mb_available, bandwidth, latency)
 
     # Now define neighbors based on the edges in the graph
     for id in G.nodes():
@@ -142,19 +196,18 @@ def seed_network_nodes():
             print(f"Node ID: {node_id}")
             print(f"Node Data: {node_data}")
             if 'data' in node_data:
-                print(f"Data Usage: {node_data['data'].data_usage} GB")
+                print(f"Data Usage: {node_data['data'].mb_usage_last_quarter} GB")
                 print(f"Bandwidth: {node_data['data'].bandwidth} Mbps")
                 print(f"Latency: {node_data['data'].latency} ms")
             print("---------")
 
 
         # Get Country Capital -> Kathmandu
-
         node_1 = nepal_graph.nodes['Kathmandu']
 
         for neighbor in node_1['data'].neighbors:
             print(f"Sending message to {neighbor}")
-            node_1['data'].send_message("Hello, neighbor!", neighbor.id)
+            node_1['data'].send_message("Hello", neighbor.id)
 
         node_1['data'].consume_messages()
 
