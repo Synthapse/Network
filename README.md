@@ -2,6 +2,18 @@
 Develop AI-driven tools that improve decentralized network performance and scalability.
 
 
+Note for tomorrow (25.01.2025) (5 terminals)
+1. ZooKeper
+2. Kafka
+3. Prometheus
+4. Kafka-Export
+5. Grafana
+
+Explore ML/AI in GNN and also some low level network how it works
+more data: https://balanced-airmail-b72.notion.site/AI-Hackhathon-181529bf8e08803db16acb72d0f899ef?pvs=74
+
+____
+
 Project containing couples of microservices, which may be deployed via Docker or Kubernetes
 
 Instalation:
