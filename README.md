@@ -29,8 +29,6 @@ Each node is both producer and the consuer - to raporting about current usage in
 # Kafka Broker 
 run locally for working communication between network
 
-Logs (Prometheus/Grafana)
-
 Go to the official Apache Kafka download page: Kafka Downloads.
 https://kafka.apache.org/downloads
 
@@ -72,16 +70,7 @@ Each node try to connect to kafka instance broker:
 Node Kathmandu sent message to Node <ISP.NetworkPoint.NetworkPoint object at 0x108f14310>: Hello, neighbor!
 Sending message to <ISP.NetworkPoint.NetworkPoint object at 0x1009349b0>
 
-
-KAFKA UI:
-
-brew install confluentinc/tap/ccloud-cli
-brew install confluentinc/tap/confluent-platform
-
-docker run -d --name=confluent-control-center -p 9021:9021 confluentinc/cp-enterprise-control-center:latest
-
-
-from Kathmandu topics:
+from Kathmandu topics (each node send data to neighbors):
 
 - node_C1_messages
 - node_C2_messages
@@ -91,6 +80,13 @@ from Kathmandu topics:
 - node_Gandaki_messages
 - node_Janakpur_messages
 
-All mesages from beggining:
+All mesages from begining (for particular topic):
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic node_Gandaki_messages --from-beginning
 
+
+KAFKA UI
+
+Logs (Prometheus/Grafana) (?)
+
+brew install confluentinc/tap/ccloud-cli
+brew install confluentinc/tap/confluent-platform
