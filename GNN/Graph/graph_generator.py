@@ -1,20 +1,11 @@
-
-# This class generate the potential graph representation of Nepal geospatial
-# 7 provinces, which are connected
-# There are 3 level of hierarchy
-#  a) Top Level (Province)
-#  b) Intermediate Level (Cities, societal places)
-#  c) Leaf Level (Schools, Villages)
-
 import networkx as nx
 import matplotlib.pyplot as plt
-
 
 def generate_nepal_graph():
     # Create a graph
     G = nx.Graph()
 
-    # Top Level: Add provincesD
+    # Top Level: Add provinces
     provinces = ["Arun", "Janakpur", "Kathmandu", "Gandaki", "Kapilavastu", "Karnali", "Mahakali"]
     G.add_nodes_from(provinces)
 
@@ -28,8 +19,6 @@ def generate_nepal_graph():
         ("Karnali", "Mahakali"),
         ("Mahakali", "Arun")
     ]
-
-
     G.add_edges_from(province_connections)
 
     # Intermediate Level: Add cities/societal places for each province
@@ -44,11 +33,14 @@ def generate_nepal_graph():
     }
 
     # Add provinces and cities to the graph
+    node_id = 1  # Starting ID for nodes
     for province, city_list in cities.items():
-        G.add_node(province)  # Add province as a node
+        G.add_node(province, id=node_id)  # Add province as a node with unique ID
+        node_id += 1
         for city in city_list:
-            G.add_node(city)  # Add city as a node
+            G.add_node(city, id=node_id)  # Add city as a node with unique ID
             G.add_edge(province, city)  # Connect province to its cities
+            node_id += 1  # Increment the ID for the next node
 
     # Leaf Level: Add 5 points (schools/villages) for each city
     schools_villages = {}
@@ -67,20 +59,23 @@ def generate_nepal_graph():
     # Add schools and villages to the graph
     for city, leaf_nodes in schools_villages.items():
         for leaf_node in leaf_nodes:
-            G.add_node(leaf_node)  # Add school or village as a node
+            G.add_node(leaf_node, id=node_id)  # Add school or village as a node with unique ID
             G.add_edge(city, leaf_node)  # Connect city to its schools/villages
-    # Print the graph's nodes and edges
-    #print("Nodes:", G.nodes())
-    #print("Edges:", G.edges())
+            node_id += 1  # Increment the ID for the next node
 
     return G
 
-
 def draw_graph(G):
-    # Draw the graph
+    # Draw the graph with node labels being node IDs
     plt.figure(figsize=(25, 15))  # Set the figure size
 
-    nx.draw(G, with_labels=True)
+    # Create a dictionary for node labels showing their unique IDs
+    node_labels = {node: G.nodes[node]['id'] for node in G.nodes}
+
+    nx.draw(G, with_labels=True, labels=node_labels)
     plt.savefig("graph.png")
     plt.close()
 
+# Example usage:
+nepal_graph = generate_nepal_graph()
+draw_graph(nepal_graph)

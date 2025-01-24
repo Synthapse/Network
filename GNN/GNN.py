@@ -8,6 +8,22 @@ from torch_geometric.loader import DataLoader
 import matplotlib.pyplot as plt
 import networkx as nx
 
+# Internet Maximum bandwidth 100 Mbps, using 50 Mbps (50%)
+
+
+# Equally:
+# Total bandwidth: 100 Mbps
+#  100 / 217 = 0.46Mbps per node
+
+# 10 000 GB per month
+# 333.33 GB per day
+# 13.89 GB per hour
+
+# Data per node
+# 46 GB/ month
+# 1.54 GB//day
+# 64 MB/ hour
+
 import torch_geometric
 
 # Convert the NetworkX graph to a PyTorch Geometric graph
@@ -23,6 +39,12 @@ print(data)
 # Data(edge_index=[2, 434], num_nodes=217, x=[217, 217])
 
 #The graph has 217 nodes. (217 Access points (routers) - in 3 lvl hierarchy
+
+# Each node have:
+
+# data_usage = 50  # Example data usage in GB
+# bandwidth = 100  # Example bandwidth in Mbps
+# latency = 10  # Example latency in ms
 
 
 # for definition
@@ -44,23 +66,6 @@ data.x = features
 # home WI-FI: 20 or 40 MHz
 
 data.y = torch.tensor([random.uniform(0, 1) for _ in range(num_nodes)])  # Example: Bandwidth target
-
-
-# Internet Maximum bandwidth 100 Mbps, using 50 Mbps (50%)
-
-
-# Equally:
-# Total bandwidth: 100 Mbps
-#  100 / 217 = 0.46Mbps per node
-
-# 10 000 GB per month
-# 333.33 GB per day
-# 13.89 GB per hour
-
-# Data per node
-# 46 GB/ month
-# 1.54 GB//day
-# 64 MB/ hour
 
 class BandwidthGNN(torch.nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
@@ -89,13 +94,8 @@ for epoch in range(100):
     optimizer.step()
     print(f"Epoch {epoch+1}, Loss: {loss.item():.4f}")
 
-
-
 model.eval()
 predictions = model(data)
 print("Predicted Bandwidth Allocations:", predictions)
 # Features: The information provided in the textbook (inputs to learn from).
 # Labels: The answers at the back of the book (targets to match during training).
-
-
-# prediction usage - based on monthly data.
