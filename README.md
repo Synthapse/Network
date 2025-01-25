@@ -84,6 +84,17 @@ Check if topics exists:
 
 bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
 
+Delete all topics:
+
+for topic in $(bin/kafka-topics.sh --bootstrap-server localhost:9092 --list); do
+    bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic $topic --delete;
+done
+
+
+kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+
+
+
 Each node try to connect to kafka instance broker:
 
 
@@ -117,8 +128,7 @@ brew install confluentinc/tap/confluent-platform
 
 1. brew install prometheus
 
-2. prometheus --config.file=/opt/homebrew/etc/prometheus.yml
-
+2.  prometheus --config.file=prometheus-2.31.2.linux-amd64/prometheus.yml
 Prometheus: http://localhost:9090/query
 
 Kafka (server_properties)

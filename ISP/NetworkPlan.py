@@ -1,4 +1,5 @@
 from django.db import models
+import random
 
 class ServicePlanManagement(models.Model):
     STATUS_CHOICES = [
@@ -29,13 +30,17 @@ class NetworkProvider():
     def charge_network(self, G):
 
         # how many internet to buy for this hour for 4 tribes (?)...
-        GBs = self.buy_transfer_giga_bytes(100)
+        gb_available = random.uniform(1, 100)  # Available GB from 1 GB to 100 GB
+        GBs = self.buy_transfer_giga_bytes(gb_available)
 
         for id in G.nodes():
-            mb_available = GBs*1000
-            mb_usage_last_quarter = 50  # Example data usage in GB
-            bandwidth = 100  # Example bandwidth in Mbps
-            latency = 10  # Example latency in ms
+            mb_available = GBs * 1000  # Convert GB to MB
+            # Random usage in the last quarter, between 0 and 50 GB
+            mb_usage_last_quarter = random.uniform(0, 50) * 1000  # GBs
+            # Random bandwidth (Mbps), from 10 Mbps to 100 Mbps
+            bandwidth = random.uniform(10, 100)
+            # Random latency (ms), between 1 ms and 100 ms
+            latency = random.uniform(1, 100)
 
             from ISP.NetworkPoint import NetworkPoint
             # Create a NetworkPoint instance and store it in the node's 'data' attribute

@@ -10,7 +10,12 @@ django.setup()
 # Step 3: Import your functions after setting up Django
 from ISP.NetworkPoint import seed_network_nodes
 from ISP.Device import simulate_device_traffic
+from GNN.GNN import train_model
 
 # Now you can call your functions
-seed_network_nodes()
-simulate_device_traffic()
+
+train_model()
+
+
+#seed_network_nodes()
+#simulate_device_traffic()

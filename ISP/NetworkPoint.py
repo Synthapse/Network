@@ -4,6 +4,7 @@ from confluent_kafka import Producer, Consumer, KafkaError
 import json
 from ISP.NetworkPlan import NetworkProvider
 import re
+import threading
 
 # Needs to improve that Kafka - cause seems - like there is too much consumers/producers
 # probbaby not well solution
@@ -11,7 +12,16 @@ import re
 #Producer: This sends messages to a Kafka topic.
 # Consumer: This receives messages from a Kafka topic.
 
+
 kafka_broker_address = "localhost:9092"
+
+# maybe transformed to differentiate proper topics and consumers (I, II or III level node or maybe device)
+def is_valid_json(message_value):
+    """Check if a string is valid JSON."""
+    try:
+        return json.loads(message_value)
+    except json.JSONDecodeError:
+        return None
 
 # Each node can be a Kafka producer (sending messages) and consumer (receiving messages)
 class NetworkPoint:
@@ -64,17 +74,18 @@ class NetworkPoint:
             'auto.offset.reset': 'earliest'
         }
         consumer = Consumer(config)
-        consumer.subscribe([f'node_{self.id}_messages'])  # Subscribe to its own topic
+
+        topic = f'node_{self.id}_messages'
+        consumer.subscribe([topic])  # Subscribe to its own topic
         print(f"Added Kafka consumer with id {self.id}")
         return consumer
 
     def send_message(self, message, neighbor_id):
         """Send a message to a specific neighbor via Kafka."""
         topic = f'node_{neighbor_id}_messages'  # Kafka topic for the neighbor
+        print(f"Node {self.id} sent message to Node {neighbor_id}: {message}")
         self.producer.produce(topic, value=message)
         self.producer.flush()
-        print(f"Node {self.id} sent message to Node {neighbor_id}: {message}")
-
 
     # divide into 2 ways
     # consume from devices
@@ -82,7 +93,9 @@ class NetworkPoint:
     def consume_messages(self):
         """Listen for claims and respond accordingly."""
         try:
-            while True:
+            is_json = True
+            json_message = None
+            while True: # Continuous consumption loop
                 message = self.consumer.poll(1.0)  # Poll messages with a timeout
                 if message is None:
                     continue
@@ -91,7 +104,6 @@ class NetworkPoint:
                     continue
 
                 # Preprocess: Convert single quotes to double quotes for keys
-                json_message = None
                 claim = message.value()
                 if isinstance(claim, bytes):
                     message_value = claim.decode('utf-8')  # Decode bytes to string
@@ -101,38 +113,51 @@ class NetworkPoint:
                             message_value = message_value.replace("'", '"')
 
                         # Attempt to parse the JSON string
-                        json_message = json.loads(message_value)
+                        is_json = is_valid_json(message_value)
+
+                        if is_json:
+                            json_message = json.loads(message_value)
+                        else:
+                            json_message = message_value
                     except json.JSONDecodeError as e:
                         print(f"Failed to decode JSON: {e}")
                         print(f"Received invalid JSON string: {message_value}")
                 print(f"Node {self.id} received claim: {json_message}")
 
-                # Evaluate the claim and prepare a response
-                if self.can_provide_data(json_message["amount_mb"]):
-
-                    self.mb_available -= json_message["amount_mb"]
-                    response = {
-                        "status": "approved",
-                        "node_id": self.id,
-                        "data_granted_mb": json_message["amount_mb"],
-                    }
+                if is_json:
+                    self.allocate_transfer_to_device(json_message)
                 else:
-                    response = {
-                        "status": "denied",
-                        "node_id": self.id,
-                        "reason": "Insufficient resources"
-                    }
+                    print(f'Consumer received message: {json_message}')
 
-                # Send the response to the appropriate topic
-                device_id = json_message["device_id"]
-                response_topic = f'responses_{device_id}'
-                self.producer.produce(response_topic, value=json.dumps(response).encode('utf-8'))
-                self.producer.flush()
-                print(f"Node {self.id} sent response: {response} to {response_topic} Transfer Left: {self.mb_available}")
         except KeyboardInterrupt:
             print("Consumer stopped.")
         finally:
             self.consumer.close()
+
+    def allocate_transfer_to_device(self, json_message):
+        # Evaluate the claim and prepare a response
+        print("Decision Point - allocate data or not")
+        if self.can_provide_data(json_message["amount_mb"]):
+
+            self.mb_available -= json_message["amount_mb"]
+            response = {
+                "status": "approved",
+                "node_id": self.id,
+                "data_granted_mb": json_message["amount_mb"],
+            }
+        else:
+            response = {
+                "status": "denied",
+                "node_id": self.id,
+                "reason": "Insufficient resources"
+            }
+
+        # Send the response to the appropriate topic
+        device_id = json_message["device_id"]
+        response_topic = f'responses_{device_id}'
+        self.producer.produce(response_topic, value=json.dumps(response).encode('utf-8'))
+        self.producer.flush()
+        print(f"Node {self.id} sent response: {response} to {response_topic} Transfer Left: {self.mb_available}")
 
     def add_neighbor(self, neighbor):
         """
@@ -176,6 +201,14 @@ def define_neighbors_tribes(G):
             neighbor_data = G.nodes[neighbor_id]['data']
             node_data.add_neighbor(neighbor_data)
 
+def consume_messages_in_thread(node):
+    """Runs consume_messages in a separate thread."""
+    node['data'].consume_messages()
+
+def send_messages_to_neighbors(node):
+    """Send messages to the node's neighbors."""
+    for neighbor in node['data'].neighbors:
+        node['data'].send_message("I have transfer problem", neighbor.id)
 
 def seed_network_nodes():
     try:
@@ -200,22 +233,41 @@ def seed_network_nodes():
             print(f"Node ID: {node_id}")
             print(f"Node Data: {node_data}")
             if 'data' in node_data:
-                print(f"Mb Available: {node_data['data'].mb_available} GB")
+                print(f"Mb Available: {node_data['data'].mb_available} MB")
                 print(f"Data usage: {node_data['data'].mb_usage_last_quarter} Mb usage last 15 minutes")
                 print(f"Bandwidth: {node_data['data'].bandwidth} Mbps")
                 print(f"Latency: {node_data['data'].latency} ms")
             print("---------")
 
+        # producer-consumer pattern:
 
         # Get Country Capital -> Kathmandu
         node_1 = nepal_graph.nodes['Kathmandu']
+        # Kathmandu communicates with Janakpur & Gandaki
+        node_2 = nepal_graph.nodes['Janakpur']
+        node_3 = nepal_graph.nodes['Gandaki']
 
-        for neighbor in node_1['data'].neighbors:
-            print(f"Sending message to {neighbor}")
-            node_1['data'].send_message("Hello", neighbor.id)
+        # Since consume_messages is a blocking call (it waits for messages)
 
-        node_1['data'].consume_messages()
+        # Start consuming messages in separate threads for node_1, node_2, and node_3
+        node_1_thread = threading.Thread(target=consume_messages_in_thread, args=(node_1,))
+        node_2_thread = threading.Thread(target=consume_messages_in_thread, args=(node_2,))
+        node_3_thread = threading.Thread(target=consume_messages_in_thread, args=(node_3,))
 
+        # Start the threads
+        node_1_thread.start()
+        node_2_thread.start()
+        node_3_thread.start()
+
+        # Now, send messages to neighbors in the main thread
+        send_messages_to_neighbors(node_1)
+        send_messages_to_neighbors(node_2)
+        send_messages_to_neighbors(node_3)
+
+        # Optionally, you can wait for threads to complete if necessary (blocking call)
+        #node_1_thread.join()
+        #node_2_thread.join()
+        #node_3_thread.join()
 
 
     except Exception as ex:

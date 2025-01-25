@@ -1,15 +1,38 @@
 from torch_geometric.utils import from_networkx
 import torch
-from Graph.graph_generator import generate_nepal_graph
+from GNN.Graph.graph_generator import generate_nepal_graph
 import random
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
+from ISP.NetworkPlan import NetworkProvider
+import h5py
 from torch_geometric.loader import DataLoader
 import matplotlib.pyplot as plt
 import networkx as nx
 
 # Internet Maximum bandwidth 100 Mbps, using 50 Mbps (50%)
 
+#Yes, the Graph Neural Network (GNN) model you’ve built can be adapted to make
+# predictions for each node for the next 15 minutes, but it would require a few
+# adjustments to incorporate temporal data and make future predictions.
+
+
+# Data(edge_index=[2, 434], num_nodes=217, x=[217, 217])
+
+#The graph has 217 nodes. (217 Access points (routers) - in 3 lvl hierarchy
+
+# Each node have:
+
+# data_usage = 50  # Example data usage in GB
+# bandwidth = 100  # Example bandwidth in Mbps
+# latency = 10  # Example latency in ms
+# for definition
+# Current load (amount of data)
+# Capacity - Maximum Data the node can handle
+# Latency requirements
+# Example features: [load, capacity]
+# target bandwidth allocation
+# home WI-FI: 20 or 40 MHz
 
 # Equally:
 # Total bandwidth: 100 Mbps
@@ -26,76 +49,92 @@ import networkx as nx
 
 import torch_geometric
 
+
+def save_model_as_h5(model, file_path):
+    # First, save the model as a PyTorch .pt or .pth file
+    torch.save(model.state_dict(), 'model.pth')  # Save model state_dict
+
+    # Convert .pth file to .h5 format
+    # Load the model state_dict
+    model_state_dict = torch.load('model.pth')
+
+    # Create an HDF5 file
+    with h5py.File(file_path, 'w') as f:
+        for key, value in model_state_dict.items():
+            # Store the model parameters as datasets in the HDF5 file
+            f.create_dataset(key, data=value.numpy())
+
+    print(f"Model saved to {file_path}")
+
 # Convert the NetworkX graph to a PyTorch Geometric graph
-
-nepal_graph = generate_nepal_graph()
-
-data = from_networkx(nepal_graph)
-
-num_nodes = data.num_nodes
-data.x = torch.eye(num_nodes)
-
-print(data)
-# Data(edge_index=[2, 434], num_nodes=217, x=[217, 217])
-
-#The graph has 217 nodes. (217 Access points (routers) - in 3 lvl hierarchy
-
-# Each node have:
-
-# data_usage = 50  # Example data usage in GB
-# bandwidth = 100  # Example bandwidth in Mbps
-# latency = 10  # Example latency in ms
-
-
-# for definition
-
-# Current load (amount of data)
-# Capacity - Maximum Data the node can handle
-# Latency requirements
-
-# random for now - its necessary some historical data (and well designed modeling)
-num_nodes = data.num_nodes
-features = torch.tensor(
-    [[random.uniform(0, 1), random.uniform(0, 1)] for _ in range(num_nodes)])
-
-# Example features: [load, capacity]
-
-data.x = features
-
-# target bandwidth allocation
-# home WI-FI: 20 or 40 MHz
-
-data.y = torch.tensor([random.uniform(0, 1) for _ in range(num_nodes)])  # Example: Bandwidth target
-
-class BandwidthGNN(torch.nn.Module):
+class BandwidthGNNWithLSTM(torch.nn.Module):
     def __init__(self, input_dim, hidden_dim, output_dim):
         super().__init__()
         self.conv1 = GCNConv(input_dim, hidden_dim)
         self.conv2 = GCNConv(hidden_dim, output_dim)
+        self.lstm = torch.nn.LSTM(input_size=output_dim, hidden_size=32, num_layers=2, batch_first=True)
+        self.fc = torch.nn.Linear(32, 1)  # Output 1 value per node for prediction
 
     def forward(self, data):
         x, edge_index = data.x, data.edge_index
         x = F.relu(self.conv1(x, edge_index))
         x = self.conv2(x, edge_index)
-        return x
 
-# Define the model
-model = BandwidthGNN(input_dim=2, hidden_dim=16, output_dim=1)  # 2 input features -> 1 output prediction
-optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
-loss_fn = torch.nn.MSELoss()
+        # Reshape for LSTM [batch_size, sequence_length, features]
+        x = x.unsqueeze(0)  # Add batch dimension
+        # Apply LSTM
+        lstm_out, _ = self.lstm(x)
 
-# Training loop
-model.train()
-for epoch in range(100):
-    optimizer.zero_grad()
-    out = model(data)
-    loss = loss_fn(out, data.y.unsqueeze(1))  # Match output to labels
-    loss.backward()
-    optimizer.step()
-    print(f"Epoch {epoch+1}, Loss: {loss.item():.4f}")
+        # For each node, use the last output timestep of the LSTM (you can also try other approaches like averaging)
+        # This will give us predictions for each node
+        output = self.fc(lstm_out.squeeze(0))  # Remove the batch dimension after LSTM output
 
-model.eval()
-predictions = model(data)
-print("Predicted Bandwidth Allocations:", predictions)
-# Features: The information provided in the textbook (inputs to learn from).
-# Labels: The answers at the back of the book (targets to match during training).
+        return output
+
+
+def train_model():
+    nepal_graph = generate_nepal_graph()
+
+    data = from_networkx(nepal_graph)
+
+    network_provider = NetworkProvider()
+    network_provider.charge_network(nepal_graph)
+
+    num_nodes = data.num_nodes
+    node_features = []
+    for node in nepal_graph.nodes:
+        # Example features; you should use the actual values here
+        data_usage_last_quarter = nepal_graph.nodes[node]["data"].mb_usage_last_quarter  # in MB
+        mb_available = nepal_graph.nodes[node]["data"].mb_available # in MB
+        bandwidth = nepal_graph.nodes[node]["data"].bandwidth  # in Mbps
+        latency = nepal_graph.nodes[node]["data"].latency # in ms
+
+        # Create the feature vector for each node
+        node_features.append([data_usage_last_quarter, mb_available, bandwidth, latency])
+
+    # Convert to a tensor
+    node_features_tensor = torch.tensor(node_features, dtype=torch.float)
+
+    data.x = node_features_tensor
+
+    next_quarter_usage = [random.uniform(1, 50) for _ in range(num_nodes)]  # Example range of 1-50 GB
+    data.y = torch.tensor(next_quarter_usage, dtype=torch.float)  # Target data usage for the next quarter (GB)
+
+    model = BandwidthGNNWithLSTM(input_dim=4, hidden_dim=16, output_dim=1)  # Use 5 as input_dim to match data.x
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+    loss_fn = torch.nn.MSELoss()
+
+
+    model.train()
+    for epoch in range(100):
+        optimizer.zero_grad()
+        out = model(data)
+        loss = loss_fn(out, data.y.unsqueeze(1))  # Match output to labels for the next 15 minutes
+        loss.backward()
+        optimizer.step()
+        print(f"Epoch {epoch + 1}, Loss: {loss.item():.4f}")
+
+    model.eval()
+    save_model_as_h5(model, 'model.h5')
+    predictions = model(data)
+    print("Predicted Data Usage for Next Quarter (15min) (GB):", predictions)
