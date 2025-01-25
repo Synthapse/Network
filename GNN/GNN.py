@@ -68,12 +68,12 @@ def save_model_as_h5(model, file_path):
 
 # Convert the NetworkX graph to a PyTorch Geometric graph
 class BandwidthGNNWithLSTM(torch.nn.Module):
-    def __init__(self, input_dim, hidden_dim, output_dim):
+    def __init__(self, input_dim, hidden_dim):
         super().__init__()
         self.conv1 = GCNConv(input_dim, hidden_dim)
-        self.conv2 = GCNConv(hidden_dim, output_dim)
-        self.lstm = torch.nn.LSTM(input_size=output_dim, hidden_size=32, num_layers=2, batch_first=True)
-        self.fc = torch.nn.Linear(32, 1)  # Output 1 value per node for prediction
+        self.conv2 = GCNConv(hidden_dim, 16)  # Now output 16 features for LSTM
+        self.lstm = torch.nn.LSTM(input_size=16, hidden_size=1, num_layers=2, batch_first=True)
+        self.fc = torch.nn.Linear(1, 1)  # Output 1 value per node for prediction
 
     def forward(self, data):
         x, edge_index = data.x, data.edge_index
@@ -81,13 +81,16 @@ class BandwidthGNNWithLSTM(torch.nn.Module):
         x = self.conv2(x, edge_index)
 
         # Reshape for LSTM [batch_size, sequence_length, features]
-        x = x.unsqueeze(0)  # Add batch dimension
-        # Apply LSTM
-        lstm_out, _ = self.lstm(x)
+        x = x.unsqueeze(0)  # Add batch dimension (shape: [1, num_nodes, output_dim])
 
-        # For each node, use the last output timestep of the LSTM (you can also try other approaches like averaging)
-        # This will give us predictions for each node
-        output = self.fc(lstm_out.squeeze(0))  # Remove the batch dimension after LSTM output
+        # Apply LSTM
+        lstm_out, _ = self.lstm(x)  # LSTM output shape: [1, num_nodes, 32]
+
+        # Use the last timestep output from the LSTM (shape: [num_nodes, 32])
+        lstm_out = lstm_out.squeeze(0)  # Remove the batch dimension (shape: [num_nodes, 32])
+
+        # Apply fully connected layer for prediction
+        output = self.fc(lstm_out)  # Shape: [num_nodes, 1]
 
         return output
 
@@ -100,28 +103,39 @@ def train_model():
     network_provider = NetworkProvider()
     network_provider.charge_network(nepal_graph)
 
+    targets = []
     num_nodes = data.num_nodes
     node_features = []
     for node in nepal_graph.nodes:
         # Example features; you should use the actual values here
         data_usage_last_quarter = nepal_graph.nodes[node]["data"].mb_usage_last_quarter  # in MB
-        mb_available = nepal_graph.nodes[node]["data"].mb_available # in MB
-        bandwidth = nepal_graph.nodes[node]["data"].bandwidth  # in Mbps
-        latency = nepal_graph.nodes[node]["data"].latency # in ms
+        mb_usage_last_two_quarter = nepal_graph.nodes[node]["data"].mb_usage_last_two_quarter # in MB
+        mb_usage_last_three_quarter = nepal_graph.nodes[node]["data"].mb_usage_last_three_quarter  # in Mbps
 
+        # Simulate target usage for the next 15 minutes
+        target_usage_next_15_min = random.uniform(10*1000, 100*1000)  # in MB
         # Create the feature vector for each node
-        node_features.append([data_usage_last_quarter, mb_available, bandwidth, latency])
+        node_features.append([data_usage_last_quarter, mb_usage_last_two_quarter, mb_usage_last_three_quarter])
+        targets.append(target_usage_next_15_min)
 
     # Convert to a tensor
     node_features_tensor = torch.tensor(node_features, dtype=torch.float)
+    targets_tensor = torch.tensor(targets, dtype=torch.float)
 
     data.x = node_features_tensor
+    data.y = targets_tensor
 
-    next_quarter_usage = [random.uniform(1, 50) for _ in range(num_nodes)]  # Example range of 1-50 GB
-    data.y = torch.tensor(next_quarter_usage, dtype=torch.float)  # Target data usage for the next quarter (GB)
+    # Normalize features and targets
+    x_min = data.x.min(dim=0, keepdim=True)[0]
+    x_max = data.x.max(dim=0, keepdim=True)[0]
+    data.x = (data.x - x_min) / (x_max - x_min)
 
-    model = BandwidthGNNWithLSTM(input_dim=4, hidden_dim=16, output_dim=1)  # Use 5 as input_dim to match data.x
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.01)
+    y_min = data.y.min()
+    y_max = data.y.max()
+    data.y = (data.y - y_min) / (y_max - y_min)
+
+    model = BandwidthGNNWithLSTM(input_dim=3, hidden_dim=16)  # Use 5 as input_dim to match data.x
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
     loss_fn = torch.nn.MSELoss()
 
 
@@ -137,4 +151,16 @@ def train_model():
     model.eval()
     save_model_as_h5(model, 'model.h5')
     predictions = model(data)
-    print("Predicted Data Usage for Next Quarter (15min) (GB):", predictions)
+    # Denormalize predictions
+    predictions_denorm = predictions * (y_max - y_min) + y_min
+    print("Predicted Data Usage for Next Quarter (15min) (MB):", predictions_denorm)
+
+    # Visualization
+    predictions_np = predictions_denorm.detach().cpu().numpy()
+    targets_np = data.y.detach().cpu().numpy()
+
+    plt.scatter(targets_np, predictions_np)
+    plt.xlabel('Actual Data Usage (MB)')
+    plt.ylabel('Predicted Data Usage (MB)')
+    plt.title('Actual vs Predicted Data Usage')
+    plt.show()

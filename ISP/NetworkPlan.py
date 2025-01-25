@@ -36,7 +36,9 @@ class NetworkProvider():
         for id in G.nodes():
             mb_available = GBs * 1000  # Convert GB to MB
             # Random usage in the last quarter, between 0 and 50 GB
-            mb_usage_last_quarter = random.uniform(0, 50) * 1000  # GBs
+            mb_usage_last_quarter = random.uniform(0, 50) * 1000  # GBs -> MBs
+            mb_usage_last_two_quarter = random.uniform(0, 50) * 1000  # GBs -> MBs
+            mb_usage_last_three_quarter = random.uniform(0, 50) * 1000  # GBs -> MBs
             # Random bandwidth (Mbps), from 10 Mbps to 100 Mbps
             bandwidth = random.uniform(10, 100)
             # Random latency (ms), between 1 ms and 100 ms
@@ -44,7 +46,7 @@ class NetworkProvider():
 
             from ISP.NetworkPoint import NetworkPoint
             # Create a NetworkPoint instance and store it in the node's 'data' attribute
-            G.nodes[id]['data'] = NetworkPoint(id, mb_usage_last_quarter, mb_available, bandwidth, latency, False)
+            G.nodes[id]['data'] = NetworkPoint(id, mb_usage_last_quarter, mb_available, bandwidth, latency, False, mb_usage_last_two_quarter, mb_usage_last_three_quarter)
 
     def charge_single_point(self, G, id):
         # Retrieve the NetworkPoint instance for the given node (id)

@@ -25,7 +25,7 @@ def is_valid_json(message_value):
 
 # Each node can be a Kafka producer (sending messages) and consumer (receiving messages)
 class NetworkPoint:
-    def __init__(self, id, mb_usage_last_quarter, mb_available, bandwidth, latency, is_5g_enabled=False):
+    def __init__(self, id, mb_usage_last_quarter, mb_available, bandwidth, latency, is_5g_enabled=False, mb_usage_last_two_quarter=0, mb_usage_last_three_quarter = 0):
         """
         Initialize the NetworkPoint with essential properties.
 
@@ -36,7 +36,9 @@ class NetworkPoint:
 
         self.id = id
         # redefine if those data per node is ok
-        self.mb_usage_last_quarter = mb_usage_last_quarter  # Data usage in MB (usage)
+        self.mb_usage_last_three_quarter = mb_usage_last_three_quarter # 30-45 minutes ago
+        self.mb_usage_last_two_quarter = mb_usage_last_two_quarter # 15-30 minutes ago
+        self.mb_usage_last_quarter = mb_usage_last_quarter  # 0-15 minutes ago
         self.mb_available = mb_available
         self.bandwidth = bandwidth  # Bandwidth in Mbps
         self.latency = latency  # Latency in ms
