@@ -30,10 +30,10 @@ class NetworkProvider():
     def charge_network(self, G):
 
         # how many internet to buy for this hour for 4 tribes (?)...
-        gb_available = random.uniform(1, 100)  # Available GB from 1 GB to 100 GB
-        GBs = self.buy_transfer_giga_bytes(gb_available)
 
         for id in G.nodes():
+            gb_available = random.uniform(1, 100)  # Available GB from 1 GB to 100 GB
+            GBs = self.buy_transfer_giga_bytes(gb_available)
             mb_available = GBs * 1000  # Convert GB to MB
             # Random usage in the last quarter, between 0 and 50 GB
             mb_usage_last_quarter = random.uniform(0, 50) * 1000  # GBs -> MBs

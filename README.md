@@ -149,5 +149,5 @@ brew install grafana
 brew services start grafana
 
 Grafana: http://localhost:3000
-
+![Kafka Consumers.png](Kafka%20Consumers.png)
 grafana.com

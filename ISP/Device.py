@@ -22,6 +22,7 @@ class UserDevice:
             "device_id": self.id,
             "amount_mb": amount_mb,
         }
+        print(f"{self.id} Device send claim to {topic}")
         self.producer.produce(topic, value=json.dumps(message).encode('utf-8'))
 
     def start_sending_claims(self):
@@ -42,13 +43,14 @@ class UserDevice:
             print(f"Received response: {response}")
             granted_mb = response["data_granted_mb"]
             self.available_mb += granted_mb
+            print(f"Available MB in device {self.id}" + str(self.available_mb))
 
 
 def consume_messages_in_thread(node, consumer):
     """Runs consume_messages in a separate thread."""
     node.listen_for_responses(consumer)
 
-def simulate_device_traffic():
+def simulate_device_traffic(parentNode):
     producer = Producer({'bootstrap.servers': kafka_broker_address})
     consumer = Consumer({
         'bootstrap.servers': kafka_broker_address,
@@ -63,7 +65,7 @@ def simulate_device_traffic():
             id=str(i),
             name=f"device{i}",
             interface_type="Ethernet" if i % 2 == 0 else "Wi-Fi",
-            parent_node="Kathmandu",
+            parent_node=parentNode,
             producer=producer,
         )
         for i in range(0, 4)
@@ -82,10 +84,8 @@ def simulate_device_traffic():
     node_4_thread.start()
 
     for i in range (0,4):
-        devices[0].send_data_claim(20)
-        devices[1].send_data_claim(20)
-        devices[2].send_data_claim(20)
-        devices[3].send_data_claim(20)
+        devices[0].send_data_claim(2000)
+        devices[1].send_data_claim(4000)
+        devices[2].send_data_claim(6000)
+        devices[3].send_data_claim(8000)
 
-if __name__ == "__main__":
-    simulate_device_traffic()

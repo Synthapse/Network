@@ -65,21 +65,49 @@ class NetworkPoint:
         """Decision logic to evaluate the claim."""
         # Example: Total available bandwidth in MB
         # (It's depends on the network)
-        return amount_mb <= self.mb_available
 
+        is_sufficient = amount_mb <= self.mb_available
+
+        # additional decision process
+        # a) device used too much
+        # b) there are another node which is more important (in some criteria)
+        return is_sufficient
+
+#Kafka consumer for node A1 assigned to group 'group_A' and topic 'node_A1_messages'
+#Kafka consumer for node B12 assigned to group 'group_B' and topic 'node_B12_messages'
+#Kafka consumer for node G9 assigned to group 'group_G9' and topic 'node_G9_messages'
 
     def create_consumer(self):
         """Create a Kafka consumer for the node."""
+        # Map letters to group names
+        group_mapping = {
+            'A': 'group_A',
+            'B': 'group_B',
+            'C': 'group_C',
+            'D': 'group_D',
+            'E': 'group_E',
+            'F': 'group_F',
+            'G': 'group_G'
+        }
+
+        # Determine the group by checking if any key in the mapping is in self.id
+        group_name = next((group_mapping[letter] for letter in group_mapping if letter in self.id), f'group_{self.id}',)
+        #topic = next((f'node_{letter}_messages' for letter in group_mapping if letter in self.id),
+        #                 f'node_{self.id}_messages')
+
+        # topic needs to be unique (?)
+        topic = f'node_{self.id}_messages'
+
         config = {
-            'bootstrap.servers': kafka_broker_address,  # Change to your Kafka broker address
-            'group.id': f'group_{self.id}',
+            'bootstrap.servers': kafka_broker_address,  # Kafka broker address
+            'group.id': group_name,  # Assign to the determined group
             'auto.offset.reset': 'earliest'
         }
-        consumer = Consumer(config)
 
-        topic = f'node_{self.id}_messages'
+        consumer = Consumer(config)
+        # Subscribe the consumer to its specific topic
         consumer.subscribe([topic])  # Subscribe to its own topic
-        print(f"Added Kafka consumer with id {self.id}")
+        print(f"Kafka consumer for node {self.id} assigned to group '{group_name}'")
         return consumer
 
     def send_message(self, message, neighbor_id):
@@ -138,9 +166,7 @@ class NetworkPoint:
 
     def allocate_transfer_to_device(self, json_message):
         # Evaluate the claim and prepare a response
-        print("Decision Point - allocate data or not")
         if self.can_provide_data(json_message["amount_mb"]):
-
             self.mb_available -= json_message["amount_mb"]
             response = {
                 "status": "approved",
@@ -212,6 +238,50 @@ def send_messages_to_neighbors(node):
     for neighbor in node['data'].neighbors:
         node['data'].send_message("I have transfer problem", neighbor.id)
 
+def process_all_nodes(graph):
+    threads = []
+
+    # Iterate over all nodes in the graph
+    for node_id in graph.nodes:
+        # Get the node data
+        node = graph.nodes[node_id]
+
+        # Create a thread for consuming messages for this node
+        thread = threading.Thread(target=consume_messages_in_thread, args=(node,))
+        threads.append(thread)
+
+        # Start the thread
+        thread.start()
+
+    # After starting all threads, send messages to neighbors for each node
+    for node_id in graph.nodes:
+        node = graph.nodes[node_id]
+        send_messages_to_neighbors(node)
+
+def process_three_nodes(nepal_graph):
+    # Get Country Capital -> Kathmandu
+    node_1 = nepal_graph.nodes['Kathmandu']
+    # Kathmandu communicates with Janakpur & Gandaki
+    node_2 = nepal_graph.nodes['Janakpur']
+    node_3 = nepal_graph.nodes['Gandaki']
+
+    # Since consume_messages is a blocking call (it waits for messages)
+
+    # Start consuming messages in separate threads for node_1, node_2, and node_3
+    node_1_thread = threading.Thread(target=consume_messages_in_thread, args=(node_1,))
+    node_2_thread = threading.Thread(target=consume_messages_in_thread, args=(node_2,))
+    node_3_thread = threading.Thread(target=consume_messages_in_thread, args=(node_3,))
+
+    # Start the threads
+    node_1_thread.start()
+    node_2_thread.start()
+    node_3_thread.start()
+
+    # Now, send messages to neighbors in the main thread
+    send_messages_to_neighbors(node_1)
+    send_messages_to_neighbors(node_2)
+    send_messages_to_neighbors(node_3)
+
 def seed_network_nodes():
     try:
         # there are also another countries...
@@ -242,34 +312,10 @@ def seed_network_nodes():
             print("---------")
 
         # producer-consumer pattern:
+        # process all nodes is complicated (needs maybe another broker per every group (A -> 30 (5 + 25) (NetworkPoint 1 -> 5, 1 -> 5)
+        # process_all_nodes(nepal_graph)
+        process_three_nodes(nepal_graph)
 
-        # Get Country Capital -> Kathmandu
-        node_1 = nepal_graph.nodes['Kathmandu']
-        # Kathmandu communicates with Janakpur & Gandaki
-        node_2 = nepal_graph.nodes['Janakpur']
-        node_3 = nepal_graph.nodes['Gandaki']
-
-        # Since consume_messages is a blocking call (it waits for messages)
-
-        # Start consuming messages in separate threads for node_1, node_2, and node_3
-        node_1_thread = threading.Thread(target=consume_messages_in_thread, args=(node_1,))
-        node_2_thread = threading.Thread(target=consume_messages_in_thread, args=(node_2,))
-        node_3_thread = threading.Thread(target=consume_messages_in_thread, args=(node_3,))
-
-        # Start the threads
-        node_1_thread.start()
-        node_2_thread.start()
-        node_3_thread.start()
-
-        # Now, send messages to neighbors in the main thread
-        send_messages_to_neighbors(node_1)
-        send_messages_to_neighbors(node_2)
-        send_messages_to_neighbors(node_3)
-
-        # Optionally, you can wait for threads to complete if necessary (blocking call)
-        #node_1_thread.join()
-        #node_2_thread.join()
-        #node_3_thread.join()
 
 
     except Exception as ex:

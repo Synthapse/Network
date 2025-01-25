@@ -14,8 +14,9 @@ from GNN.GNN import train_model
 
 # Now you can call your functions
 
-train_model()
+#train_model()
 
-
-#seed_network_nodes()
-#simulate_device_traffic()
+seed_network_nodes()
+simulate_device_traffic("Kathmandu")
+simulate_device_traffic("Janakpur")
+simulate_device_traffic("Gandaki")
