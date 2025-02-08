@@ -7,3 +7,5 @@ torch_scatter==2.1.1
 torch_cluster==1.6.0
 django
 h5py
+geopandas
+geopy

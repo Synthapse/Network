@@ -2,6 +2,46 @@
 Develop AI-driven tools that improve decentralized network performance and scalability.
 
 
+TCP - > HOMA/QUIC (?)
+
+(https://github.com/h2o/quicly/)
+Alternatives protocols:
+
+- RINA (Recursive InterNetwork Architecture) (Future internet architectures.)
+- NDN (Named Data Networking) (Future decentralized networking.)
+- DCCP (Datagram Congestion Control Protocol) (VideoStreaming, Gaming)
+- SCTP (Stream Control Transmission Protocol) (5G)
+- 
+
+
+- Particle Swarm Optimization (PSO)
+- Ant Colony Optimization (ACO)
+
+
+- Optimizing WiFi Tower Placement (PSO + GNN)
+- Finding Best Routing Paths for Connectivity (ACO + GNN)
+- Load Balancing in Networks (GNN helps ACO/PSO balance traffic)
+- Autonomous Drone-Based Signal Boosting (ACO finds best signal relay points)
+
+LOW LEVEL NETWORK (node <-> device)
+
+
+
+**CI/CD Part (for demo):**
+
+- Zookepper 
+- Kafka (1 Instance)
+- Simulator (Is this an API?)
+- UI (probably something admin panel)
+
+**Kenya:**
+
+- GIS data, (https://www.wri.org/data/kenya-gis-data#agriculture)
+- user density maps, (https://data.humdata.org/dataset/highresolutionpopulationdensitymaps-ken)
+- interference models
+
+
+
 Note for tomorrow (25.01.2025) (5 terminals)
 1. ZooKeper
 2. Kafka
