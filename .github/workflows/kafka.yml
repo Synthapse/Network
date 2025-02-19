@@ -41,7 +41,8 @@ jobs:
             --project=$PROJECT_ID \
             --zone=$ZONE \
             --machine-type=e2-standard-2 \
-            --image=debian-cloud/debian-11-bullseye-v20250212 \
+            --image=debian-11-bullseye-v20250212 \
+            --image-project=debian-cloud \
             --boot-disk-size=50GB \
             --tags=kafka-server \
             --metadata=startup-script='#!/bin/bash
