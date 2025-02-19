@@ -15,6 +15,13 @@ gcloud artifacts repositories add-iam-policy-binding kafka \
   --role="roles/artifactregistry.writer"
 
 
+19.02.2025 Note
+For scalability/maintanability kafka and zookeeper needs to be separated...
+
+🔴 Kafka is NOT designed to run on Cloud Run!
+
+Deploy Kafka on a GCE Virtual Machine 
+
 ## 1. Network Protocols
 
 ### TCP Alternatives:

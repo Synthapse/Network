@@ -1,22 +1,24 @@
 FROM confluentinc/cp-kafka:latest
 
 # Set environment variables for ZooKeeper and Kafka
-ENV ZOOKEEPER_CONNECT=zookeeper:2181
+ENV ZOOKEEPER_DATA_DIR=/var/lib/zookeeper
+ENV ZOOKEEPER_CLIENT_PORT=2181
+ENV ZOOKEEPER_TICK_TIME=2000
 ENV KAFKA_BROKER_ID=1
 ENV KAFKA_LOG_DIRS=/var/lib/kafka/data
 ENV KAFKA_LISTENERS=PLAINTEXT://:9092
 ENV KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
-ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+ENV KAFKA_ZOOKEEPER_CONNECT=localhost:2181
 
-# Create a directory for Kafka logs with correct ownership
+# Create required directories
 USER root
-RUN mkdir -p /var/lib/kafka/data && chown -R root:root /var/lib/kafka/data
+RUN mkdir -p /var/lib/kafka/data /var/lib/zookeeper \
+    && chown -R root:root /var/lib/kafka/data /var/lib/zookeeper
 
-# Switch back to Kafka user if it exists
-USER kafka
+# Expose ZooKeeper and Kafka ports
+EXPOSE 2181 9092
 
-# Expose Kafka default port
-EXPOSE 9092
-
-# Start Kafka server
-CMD ["/etc/confluent/docker/run"]
+# Start both ZooKeeper and Kafka
+CMD \
+    zookeeper-server-start /etc/kafka/zookeeper.properties & \
+    /etc/confluent/docker/run
