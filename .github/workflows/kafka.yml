@@ -35,13 +35,13 @@ jobs:
       - name: 'Use gcloud CLI'
         run: 'gcloud info'
 
-      - name: Create GCE VM for Kafka
+      - name: 'Create GCE VM for Kafka'
         run: |-
           gcloud compute instances create $VM_NAME \
             --project=$PROJECT_ID \
             --zone=$ZONE \
             --machine-type=e2-standard-2 \
-            --image=debian-cloud/global/images/debian-11-bullseye-v20250212 \
+            --image=debian-cloud/debian-11-bullseye-v20250212 \
             --boot-disk-size=50GB \
             --tags=kafka-server \
             --metadata=startup-script='#!/bin/bash
@@ -49,12 +49,23 @@ jobs:
             sudo apt install -y docker.io
             sudo systemctl start docker
             sudo systemctl enable docker
+            
+            # Create a Docker network for Kafka and Zookeeper
             sudo docker network create kafka-net
+            
+            # Start Zookeeper container
             sudo docker run -d --network=kafka-net --name zookeeper -p 2181:2181 confluentinc/cp-zookeeper:latest
+            
+            # Start Kafka container
             sudo docker run -d --network=kafka-net --name kafka -p 9092:9092 \
             -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
             -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$(curl -s ifconfig.me):9092 \
-            confluentinc/cp-kafka:latest'
+            confluentinc/cp-kafka:latest
+            
+            # Start Kafka Exporter container
+            sudo docker run -d --network=kafka-net --name kafka-exporter -p 9308:9308 \
+            -e KAFKA_SERVER=kafka:9092 \
+            danielqsj/kafka-exporter:latest'
 
       - name: Verify Kafka Deployment
         run: |-
