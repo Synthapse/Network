@@ -1,193 +1,219 @@
-# Network
+# Network/Energy Optimization Project (IoT)
+
 Develop AI-driven tools that improve decentralized network performance and scalability.
 
+---
 
-TCP - > HOMA/QUIC (?)
+## 1. Network Protocols
 
-(https://github.com/h2o/quicly/)
-Alternatives protocols:
+### TCP Alternatives:
 
-- RINA (Recursive InterNetwork Architecture) (Future internet architectures.)
-- NDN (Named Data Networking) (Future decentralized networking.)
-- DCCP (Datagram Congestion Control Protocol) (VideoStreaming, Gaming)
-- SCTP (Stream Control Transmission Protocol) (5G)
-- 
+- **HOMA/QUIC** ([Quicly](https://github.com/h2o/quicly/))
+- **RINA** (Recursive InterNetwork Architecture) - Future internet architectures
+- **NDN** (Named Data Networking) - Future decentralized networking
+- **DCCP** (Datagram Congestion Control Protocol) - Video Streaming, Gaming
+- **SCTP** (Stream Control Transmission Protocol) - 5G
 
+---
 
-- Particle Swarm Optimization (PSO)
-- Ant Colony Optimization (ACO)
+## 2. Optimization Techniques
 
+### AI-Based Optimization:
 
-- Optimizing WiFi Tower Placement (PSO + GNN)
-- Finding Best Routing Paths for Connectivity (ACO + GNN)
-- Load Balancing in Networks (GNN helps ACO/PSO balance traffic)
-- Autonomous Drone-Based Signal Boosting (ACO finds best signal relay points)
+- **Particle Swarm Optimization (PSO)**
+- **Ant Colony Optimization (ACO)**
 
-LOW LEVEL NETWORK (node <-> device)
+### Use Cases:
 
+- **Optimizing WiFi Tower Placement** (PSO + GNN)
+- **Finding Best Routing Paths for Connectivity** (ACO + GNN)
+- **Load Balancing in Networks** (GNN helps ACO/PSO balance traffic)
+- **Autonomous Drone-Based Signal Boosting** (ACO finds best signal relay points)
 
+---
 
-**CI/CD Part (for demo):**
+## 3. CI/CD for Demonstration
 
-- Zookepper 
-- Kafka (1 Instance)
-- Simulator (Is this an API?)
-- UI (probably something admin panel)
+### Components:
 
-**Kenya:**
+- **Zookeeper**
+- **Kafka (1 Instance)**
+- **Simulator** (API?)
+- **UI** (Admin Panel)
 
-- GIS data, (https://www.wri.org/data/kenya-gis-data#agriculture)
-- user density maps, (https://data.humdata.org/dataset/highresolutionpopulationdensitymaps-ken)
-- interference models
+### Note for Tomorrow (25.01.2025) - 5 Terminals:
 
-
-
-Note for tomorrow (25.01.2025) (5 terminals)
-1. ZooKeper
+1. ZooKeeper
 2. Kafka
 3. Prometheus
 4. Kafka-Export
 5. Grafana
 
-Explore ML/AI in GNN and also some low level network how it works
-more data: https://balanced-airmail-b72.notion.site/AI-Hackhathon-181529bf8e08803db16acb72d0f899ef?pvs=74
+---
 
-____
+## 4. GIS Data & Interference Models (Kenya)
 
-Project containing couples of microservices, which may be deployed via Docker or Kubernetes
+- [GIS Data](https://www.wri.org/data/kenya-gis-data#agriculture)
+- [User Density Maps](https://data.humdata.org/dataset/highresolutionpopulationdensitymaps-ken)
+- **Interference Models**
 
-Instalation:
+---
 
+## 5. Project Deployment
+
+This project contains multiple microservices and can be deployed via Docker or Kubernetes.
+
+### Installation:
+
+```bash
 pip install -r requirements.txt
+```
 
-5G Network optimizatoin
-id, scenario, description, label, estimated_throughput_increase
+### 5G Network Optimization Dataset:
 
-https://huggingface.co/datasets/infinite-dataset-hub/5GNetworkOptimization?row=44
+- **Schema:** id, scenario, description, label, estimated\_throughput\_increase
+- [Dataset on Hugging Face](https://huggingface.co/datasets/infinite-dataset-hub/5GNetworkOptimization?row=44)
 
+### Environment Setup:
+
+```bash
 export DJANGO_SETTINGS_MODULE=Network.settings
+```
 
+---
 
-# Time Series predictive algorithm
-SARIMA (Seasonal Autoregressive Integrated Moving Average)
-(https://machinelearningmastery.com/sarima-for-time-series-forecasting-in-python/)
+## 6. Time Series Predictive Algorithm
 
-https://colab.research.google.com/drive/1MGkMvDWOphm4Iyn8Kwq-_I2LyH07Khv9?usp=sharing#scrollTo=pSjoPXIHn2P7
+### SARIMA (Seasonal Autoregressive Integrated Moving Average)
 
-run in debug mode: 
+- [Guide](https://machinelearningmastery.com/sarima-for-time-series-forecasting-in-python/)
+- [Colab Notebook](https://colab.research.google.com/drive/1MGkMvDWOphm4Iyn8Kwq-_I2LyH07Khv9?usp=sharing#scrollTo=pSjoPXIHn2P7)
+
+### Run in Debug Mode:
+
+```bash
 python3 -m pdb main.py
+```
 
-# GNN (GNN Graph Neutral Network) 
-Training model for distribution the network
+---
 
-# ISP
-Seeding the every nodes in graph by real internet data
-DataStreaming -> Kafka for real time communication with the nodes to the neighbours.
-Each node is both producer and the consuer - to raporting about current usage in time interval
-(1 month, 1 week, 1 hour, 1 minute)]
+## 7. Graph Neural Networks (GNN)
 
-# Kafka Broker 
-run locally for working communication between network
+- **Training model for network distribution**
+- **Seeding every node in the graph with real internet data**
+- **Data Streaming with Kafka** for real-time communication between nodes
+- **Each node acts as both producer and consumer**, reporting current usage at intervals (1 month, 1 week, 1 hour, 1 minute)
 
-Go to the official Apache Kafka download page: Kafka Downloads.
-https://kafka.apache.org/downloads
+---
 
+## 8. Kafka Broker
 
-1. Start Zookeper (for distributed coordination) (in downloaded folder)
-2. Start Kafka Broker
+### Local Setup:
 
-May be installed locally or via docker (docker-compose up)
+1. **Download Kafka** ([Official Apache Kafka Download](https://kafka.apache.org/downloads))
+2. **Start ZooKeeper (for distributed coordination):**
+   ```bash
+   cd kafka_2.12-3.9.0
+   bin/zookeeper-server-start.sh config/zookeeper.properties
+   ```
+3. **Start Kafka Broker:**
+   ```bash
+   bin/kafka-server-start.sh config/server.properties
+   ```
 
-cd kafka_2.12-3.9.0
-bin/zookeeper-server-start.sh config/zookeeper.properties
-bin/kafka-server-start.sh config/server.properties
+### Stopping Kafka:
 
-stop: 
-
+```bash
 rm -rf /tmp/zookeeper
 rm -rf /tmp/kafka-logs
-
 bin/kafka-server-stop.sh
 bin/zookeeper-server-stop.sh
+```
 
+### Kafka Cleanup:
 
-CLEANUP KAFKA:
-
-
+```bash
 lsof -i :9092
 kill -9 <PID>
+```
 
+### Checking Topics:
 
-open: localhost:9092
-
-Check if topics exists:
-
+```bash
 bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+```
 
-Delete all topics:
+### Delete All Topics:
 
+```bash
 for topic in $(bin/kafka-topics.sh --bootstrap-server localhost:9092 --list); do
     bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic $topic --delete;
 done
+```
 
+### Kafka Consumer Groups:
 
+```bash
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
+```
 
+### Sample Node Communication:
 
-
-Each node try to connect to kafka instance broker:
-
-
-%3|1737714414.271|FAIL|rdkafka#consumer-316| [thrd:localhost:9092/bootstrap]: localhost:9092/bootstrap: Connect to ipv6#[::1]:9092 failed: Connection refused (after 50ms in state CONNECT)
-
-
+```log
 Node Kathmandu sent message to Node <ISP.NetworkPoint.NetworkPoint object at 0x108f14310>: Hello, neighbor!
 Sending message to <ISP.NetworkPoint.NetworkPoint object at 0x1009349b0>
+```
 
-from Kathmandu topics (each node send data to neighbors):
+### Messages from Beginning:
 
-- node_C1_messages
-- node_C2_messages
-- node_C3_messages
-- node_C4_messages
-- node_C5_messages
-- node_Gandaki_messages
-- node_Janakpur_messages
-
-All mesages from begining (for particular topic):
-
+```bash
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic node_Gandaki_messages --from-beginning
+```
 
-KAFKA UI
+---
 
-Logs (Prometheus/Grafana) (?)
+## 9. Monitoring & Logging
 
+### Kafka UI:
+
+- **Logs with Prometheus/Grafana** (To be confirmed)
+
+### Installation:
+
+```bash
 brew install confluentinc/tap/ccloud-cli
 brew install confluentinc/tap/confluent-platform
+brew install prometheus
+```
 
+### Running Prometheus:
 
-1. brew install prometheus
+```bash
+prometheus --config.file=prometheus-2.31.2.linux-amd64/prometheus.yml
+```
 
-2.  prometheus --config.file=prometheus-2.31.2.linux-amd64/prometheus.yml
-Prometheus: http://localhost:9090/query
+- **Prometheus UI:** [http://localhost:9090/query](http://localhost:9090/query)
 
-Kafka (server_properties)
+### Running Kafka Exporter:
 
-advertised.listeners=PLAINTEXT://localhost:9092,CONTROLLER://localhost:9093 -> advertised.listeners=PLAINTEXT://host.docker.internal:9092,CONTROLLER://host.docker.internal:9093
+```bash
+docker run -ti --rm -p 9308:9308 danielqsj/kafka-exporter --kafka.server=host.docker.internal:9092
+```
 
+- **Kafka Exporter Metrics:** [http://localhost:9308/metrics](http://localhost:9308/metrics)
 
-Kafka Exporter
-(Kafka outside of docker lol)
-#   -e KAFKA_SERVER=localhost:9092 \
-docker run -ti --rm -p 9308:9308 danielqsj/kafka-exporter --kafka.server=host.docker.internal:9092 
+### Running Grafana:
 
-
-Kafka_Exporter: http://localhost:9308/metrics
-
-
+```bash
 brew install grafana
 brew services start grafana
+```
 
-Grafana: http://localhost:3000
-![Kafka Consumers.png](Kafka%20Consumers.png)
-grafana.com
+- **Grafana UI:** [http://localhost:3000](http://localhost:3000)
+
+---
+
+## 10. Additional Resources
+
+- **AI Hackathon Data:** [Notion Page](https://balanced-airmail-b72.notion.site/AI-Hackhathon-181529bf8e08803db16acb72d0f899ef?pvs=74)
+

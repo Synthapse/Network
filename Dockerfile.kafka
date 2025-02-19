@@ -1,0 +1,18 @@
+FROM confluentinc/cp-kafka:latest
+
+# Set environment variables for ZooKeeper and Kafka
+ENV ZOOKEEPER_CONNECT=zookeeper:2181
+ENV KAFKA_BROKER_ID=1
+ENV KAFKA_LOG_DIRS=/var/lib/kafka/data
+ENV KAFKA_LISTENERS=PLAINTEXT://:9092
+ENV KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://localhost:9092
+ENV KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+
+# Create a directory for Kafka logs
+RUN mkdir -p /var/lib/kafka/data && chown -R kafka:kafka /var/lib/kafka/data
+
+# Expose Kafka default port
+EXPOSE 9092
+
+# Start Kafka server
+CMD ["/etc/confluent/docker/run"]
