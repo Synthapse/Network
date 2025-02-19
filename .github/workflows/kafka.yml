@@ -38,23 +38,23 @@ jobs:
       - name: Create GCE VM for Kafka
         run: |-
           gcloud compute instances create $VM_NAME \
-          --project=$PROJECT_ID \
-          --zone=$ZONE \
-          --machine-type=e2-standard-2 \
-          --image=debian-11 \
-          --boot-disk-size=50GB \
-          --tags=kafka-server \
-          --metadata=startup-script='#!/bin/bash
-          sudo apt update
-          sudo apt install -y docker.io
-          sudo systemctl start docker
-          sudo systemctl enable docker
-          sudo docker network create kafka-net
-          sudo docker run -d --network=kafka-net --name zookeeper -p 2181:2181 confluentinc/cp-zookeeper:latest
-          sudo docker run -d --network=kafka-net --name kafka -p 9092:9092 \
-          -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
-          -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$(curl -s ifconfig.me):9092 \
-          confluentinc/cp-kafka:latest'
+            --project=$PROJECT_ID \
+            --zone=$ZONE \
+            --machine-type=e2-standard-2 \
+            --image=debian-cloud/global/images/debian-11-bullseye-v20250212 \
+            --boot-disk-size=50GB \
+            --tags=kafka-server \
+            --metadata=startup-script='#!/bin/bash
+            sudo apt update
+            sudo apt install -y docker.io
+            sudo systemctl start docker
+            sudo systemctl enable docker
+            sudo docker network create kafka-net
+            sudo docker run -d --network=kafka-net --name zookeeper -p 2181:2181 confluentinc/cp-zookeeper:latest
+            sudo docker run -d --network=kafka-net --name kafka -p 9092:9092 \
+            -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+            -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$(curl -s ifconfig.me):9092 \
+            confluentinc/cp-kafka:latest'
 
       - name: Verify Kafka Deployment
         run: |-
