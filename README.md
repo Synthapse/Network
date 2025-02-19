@@ -4,6 +4,17 @@ Develop AI-driven tools that improve decentralized network performance and scala
 
 ---
 
+
+gcloud config set project cognispace
+gcloud config set account coginspace@cognispace.iam.gserviceaccount.com
+
+gcloud artifacts repositories add-iam-policy-binding kafka \
+  --location=europe-central2 \
+  --project=voicesense \
+  --member="allUsers" \
+  --role="roles/artifactregistry.writer"
+
+
 ## 1. Network Protocols
 
 ### TCP Alternatives:

@@ -1,4 +1,4 @@
-name: Deploy Kafka Exporter
+name: Kafka Exporter
 
 on:
   push:
