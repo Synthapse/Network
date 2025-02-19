@@ -1,10 +1,10 @@
 FROM danielqsj/kafka-exporter:latest
 
 # Set environment variables
-ENV KAFKA_SERVER=kafka:9092
+ENV KAFKA_SERVER=kafka:8080
 
 # Expose Kafka Exporter default port
-EXPOSE 9308
+EXPOSE 8080
 
 # Start Kafka Exporter
 CMD ["/kafka_exporter", "--kafka.server=${KAFKA_SERVER}"]

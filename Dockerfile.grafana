@@ -1,7 +1,7 @@
 FROM grafana/grafana:latest
 
 # Expose Grafana default port
-EXPOSE 3000
+EXPOSE 8080
 
 # Start Grafana
 CMD ["/run.sh"]
