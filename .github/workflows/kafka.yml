@@ -9,7 +9,7 @@ on:
 env:
   PROJECT_ID: cognispace
   GAR_LOCATION: europe-central2
-  SERVICE: kafka-service
+  SERVICE: kafka
   REGION: europe-central2
 
 jobs:
