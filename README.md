@@ -2,6 +2,20 @@
 
 Develop AI-driven tools that improve decentralized network performance and scalability.
 
+
+1. Network.AI
+2. Network.Data
+3. Network.Frontend
+4. Network.Infrastracture
+5. Network.Backend
+
+
+23.02.2025 (PZ)
+
+- Cost preparation (how much will it cost to run the project in GCP weekly/monthly)
+   - Kafka, Kafka Exporter, Grafana, Prometheus
+   
+
 ---
 
 

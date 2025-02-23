@@ -7,7 +7,6 @@ on:
   workflow_dispatch:
 
 env:
-  API_URL: "https://cognispace-ukddwnxkhq-lm.a.run.app"
   Domain: 'Cognispace.io'
   BUCKET: 'cognispace'
   ENVIRONMENT: true
@@ -31,12 +30,17 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - uses: microsoft/variable-substitution@v1
-        with:
-          files: 'Network.Frontend/src/config.json'
-        env:
-          apps.CognispaceAPI.url: ${{ env.API_URL }}
-          apps.CognispaceAPI.isProduction: ${{ env.ENVIRONMENT }}
+      # 23.02.2025 [PZ]
+      # Needs to define proper engineering balance between frontend/backend 
+      # Especially when there will be integration with LLM - with Multi Agent Architecture
+
+
+      # - uses: microsoft/variable-substitution@v1
+      #   with:
+      #     files: 'Network.Frontend/src/config.json'
+      #   env:
+      #     apps.CognispaceAPI.url: ${{ env.API_URL }}
+      #     apps.CognispaceAPI.isProduction: ${{ env.ENVIRONMENT }}
 
       - name: Read config.json from Cognispace.Front
         run: 'cat Network.Frontend/src/config.json'
