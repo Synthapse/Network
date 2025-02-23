@@ -1,6 +1,7 @@
 {
   "name": "react-shadcn-ui-template",
   "private": true,
+  "homepage": "/cognispace",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
