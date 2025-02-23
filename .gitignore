@@ -5,3 +5,6 @@ Data/01JJHJ1EXMVY05M9XY8TNK2R5Z/meta.json
 Data/01JJHJ1EXMVY05M9XY8TNK2R5Z/index
 Data/01JJHJ1EXMVY05M9XY8TNK2R5Z/chunks/000001
 .idea/Network.iml
+
+
+Network.Frontend/node_modules/*

@@ -1,0 +1,52 @@
+name: Network Frontend
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  API_URL: "https://cognispace-ukddwnxkhq-lm.a.run.app"
+  Domain: 'Cognispace.io'
+  BUCKET: 'cognispace'
+  ENVIRONMENT: true
+
+jobs:
+
+  build:
+    # needs: E2E
+    runs-on: ubuntu-latest
+    steps:
+      - id: 'auth'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          credentials_json: '${{ secrets.GCP_SA_KEY_COGNISPACE }}'
+
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        
+      - name: 'Use gcloud CLI'
+        run: 'gcloud info'
+
+      - uses: actions/checkout@v2
+
+      - uses: microsoft/variable-substitution@v1
+        with:
+          files: 'Network.Frontend/src/config.json'
+        env:
+          apps.CognispaceAPI.url: ${{ env.API_URL }}
+          apps.CognispaceAPI.isProduction: ${{ env.ENVIRONMENT }}
+
+      - name: Read config.json from Cognispace.Front
+        run: 'cat Network.Frontend/src/config.json'
+
+      - name: Build and deploy frontend to static GCP Cloud Storage
+        run: |
+          cd ./Network.Frontend/
+          npm install --force
+          CI=false npm run build
+          gsutil web set -m index.html -e index.html gs://${{ env.BUCKET }}
+          gsutil iam ch allUsers:legacyObjectReader gs://${{ env.BUCKET }}
+          gsutil -h "Cache-Control:public, max-age=0, no-transform" rsync -d -r ./build gs://${{env.BUCKET}}
+        # gcloud compute url-maps invalidate-cdn-cache planfi-lb --path '/${{env.Domain}}/*'

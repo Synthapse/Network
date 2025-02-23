@@ -1,0 +1,17 @@
+{
+    "apps": {
+        "GoogleAnalytics": {
+            "streamId": "",
+            "measurementId": ""
+        },
+        "Firebase": {
+            "apiKey": "AIzaSyCsNmlCJJMBohSqrLFs1itcf0CIu3u-4ic",
+            "authDomain": "cognispace.firebaseapp.com",
+            "projectId": "cognispace",
+            "storageBucket": "cognispace.appspot.com",
+            "messagingSenderId": "946555989276",
+            "appId": "1:946555989276:web:84a9b52d71d29bc1bb5ed9",
+            "measurementId": "G-R8MG7V24XD"
+        }
+    }
+}

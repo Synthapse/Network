@@ -19,8 +19,16 @@ gcloud artifacts repositories add-iam-policy-binding kafka \
 For scalability/maintanability kafka and zookeeper needs to be separated...
 
 🔴 Kafka is NOT designed to run on Cloud Run!
-
 Deploy Kafka on a GCE Virtual Machine 
+
+Next Deployment steps further:
+
+1. remove Dockerfile.kafka, Dockerfile.kafka-exporter
+2. remove workflow for kafka-exporter
+3. verify kafka-exporter & kafka in GCE
+4. send request from localhost solution to kafka
+5. verify logs
+6. connect grafana to kafka
 
 ## 1. Network Protocols
 
