@@ -52,5 +52,5 @@ jobs:
           CI=false npm run build
           gsutil web set -m index.html -e index.html gs://${{ env.BUCKET }}
           gsutil iam ch allUsers:legacyObjectReader gs://${{ env.BUCKET }}
-          gsutil -h "Cache-Control:public, max-age=0, no-transform" rsync -d -r ./build gs://${{env.BUCKET}}
+          gsutil -h "Cache-Control:public, max-age=0, no-transform" rsync -d -r ./dist gs://${{env.BUCKET}}
         # gcloud compute url-maps invalidate-cdn-cache planfi-lb --path '/${{env.Domain}}/*'
