@@ -1,6 +1,7 @@
 import { GoogleAuthProvider, getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
+//23.02.2025 -> INTEGRATE WITH GA
+//import { getAnalytics } from "firebase/analytics";
 import config from "./config.json";
 
 const firebaseConfig = {
@@ -18,6 +19,6 @@ provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
+//const analytics = getAnalytics(app);
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
