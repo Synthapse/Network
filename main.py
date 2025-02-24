@@ -8,7 +8,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "isp_management_api.settings")
 django.setup()
 
 # Step 3: Import your functions after setting up Django
-from ISP.NetworkPoint import seed_network_nodes
+from Network.NetworkPoint import seed_network_nodes
 from ISP.Device import simulate_device_traffic
 from GNN.GNN import train_model
 

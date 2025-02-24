@@ -4,10 +4,12 @@ from GNN.Graph.graph_generator import generate_nepal_graph
 import random
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
-from ISP.NetworkPlan import NetworkProvider
+
 import h5py
 from torch_geometric.loader import DataLoader
 import matplotlib.pyplot as plt
+
+from Network.ISP.ISP.NetworkPlan import NetworkProvider
 import networkx as nx
 
 # Internet Maximum bandwidth 100 Mbps, using 50 Mbps (50%)

@@ -1,0 +1,87 @@
+idx,scenario_description,label,estimated_throughput_increase
+0,Implementing dynamic spectrum allocation in urban areas to address congestion during peak hours,DynamicSpectrumAllocation,20%
+1,Using AI-based predictive analytics to preemptively redistribute network resources before demand surges,PredictiveResourceRedistribution,15%
+2,Deploying small cells in high-density areas to offload traffic from macro cells,SmallCellDeployment,18%
+3,Enhancing Quality of Service (QoS) policies for video streaming services to prioritize traffic,QoSEnhancement,10%
+4,Adaptive load balancing across 5G and 4G networks based on real-time usage data,AdaptiveLoadBalancing,22%
+5,Dynamic allocation of spectrum in a densely populated city center to meet the surge in mobile data traffic during events,DSAEventTraffic,25%
+6,Utilizing machine learning algorithms to forecast peak traffic periods and adjusting bandwidth accordingly,PredictiveResourceRedistribution,18%
+7,Installation of small cells in a suburban neighborhood with limited macro coverage,HighPotential,30%
+8,Upgrading video streaming service bandwidth to support 4K content,QoSEnhancement,12%
+9,Utilizing machine learning algorithms to predict traffic patterns and adjust load distribution in real-time,AdaptiveLoadBalancing,25%
+10,Utilizing machine learning to dynamically allocate spectrum in suburban areas during off-peak hours,DynamicSpectrumAllocation,12%
+11,Utilizing machine learning models to predict peak usage times and redistributing resources accordingly,PredictiveResourceRedistribution,12%
+12,Deploying small cells in suburban residential areas to improve coverage and reduce dead zones,SmallCellDeployment,12%
+13,Implementing stricter QoS policies for emergency services to ensure reliable connectivity,QoSEmergencyPriority,5%
+14,Implementing adaptive load balancing across multiple frequency bands to optimize for user mobility,MobilityAdaptiveLoad,17%
+15,Adjusting spectrum allocation for a commercial area with mixed-use properties to accommodate varying demand throughout the day,DSAMixedUseArea,20%
+16,Implementing AI to analyze historical data and predictively scale network resources in anticipation of major events,PredictiveResourceRedistribution,25%
+17,Deployment of femtocells in a large corporate campus to enhance in-building connectivity,CampusConnectivity,25%
+18,Implementing smart QoS adjustments during periods of high network congestion,QoSEnhancement,8%
+19,Implementing a cloud-based orchestration platform for automatic network service scaling during high demand,AdaptiveLoadBalancing,30%
+20,Implementing frequency reuse in cellular networks to increase capacity,DynamicSpectrumAllocation,14%
+21,Applying reinforcement learning to adaptively change network parameters for optimal resource distribution,PredictiveResourceRedistribution,14%
+22,Implementing small cell clusters in educational campuses to handle large device traffic during peak times,SmallCellDeployment,17%
+23,Upgrading network infrastructure to support higher bitrates for premium content,BitrateEnhancement,7%
+24,Integrating machine learning models to predict traffic patterns and adjust load distribution in real-time,MLPredictiveTrafficAdjustment,19%
+25,Implementing DSA in a rural area to improve coverage and capacity during peak usage times,DSARuralCoverage,15%
+26,Deploying an AI-driven analytics system that anticipates user behavior patterns for preemptive resource allocation,PredictiveResourceRedistribution,20%
+27,Strategic placement of small cells in a downtown area to relieve network load during peak traffic hours,DowntownLoadRelief,28%
+28,Introducing new QoS parameters for latency-sensitive applications like VoIP,QoSEnhancement,9%
+29,Employing deep learning models to identify and resolve network bottlenecks for optimal data flow,AdaptiveLoadBalancing,20%
+30,Applying stochastic models for real-time spectrum allocation to avoid interference,DynamicSpectrumAllocation,17%
+31,Leveraging deep neural networks to forecast demand in different network zones and adjust resource allocation,PredictiveResourceRedistribution,16%
+32,Rolling out small cells in retail complexes to manage increased device density and high-speed data requirements,SmallCellDeployment,13%
+33,Adjusting bandwidth allocation to prioritize VoIP traffic over standard data transfers,VoIPPriorityAdjustment,4%
+34,Dynamic allocation of resources to network cells based on historical and current usage data,HistoricalDataAllocation,14%
+35,Utilizing DSA to balance the load between 5G and 4G networks in a suburban setting,DSASuburbanBalancing,18%
+36,Integrating AI with network monitoring tools to identify and mitigate potential congestion points before they occur,PredictiveResourceRedistribution,22%
+37,Use of small cells to support emergency services' communication in urban environments,EmergencyServiceSupport,35%
+38,Optimizing video codec efficiency to improve streaming performance,QoSEnhancement,13%
+39,Designing a multi-tiered network architecture that can dynamically route traffic based on current load and latency metrics,AdaptiveLoadBalancing,28%
+40,Adjusting bandwidth allocation in real-time based on user demand and channel conditions,DynamicSpectrumAllocation,19%
+41,Using time-series analysis to identify usage patterns and reallocate network resources preemptively,PredictiveResourceRedistribution,11%
+42,Setting up small cell networks in concert halls and stadiums to enhance connectivity during large-scale events,SmallCellDeployment,15%
+43,Introducing QoS tiers for different user groups to optimize network usage,UserGroupTiering,6%
+45,Dynamic spectrum allocation in response to a sudden spike in data usage due to a viral social media event,DSASocialMediaSpike,30%
+46,Leveraging AI to dynamically adjust network parameters in real-time based on predictive traffic flow models,PredictiveResourceRedistribution,19%
+47,Incorporating small cells to complement the existing macro network in a rural area,RuralNetworkEnhancement,22%
+48,Implementing QoS-aware routing to reduce packet loss for critical services,QoSEnhancement,7%
+49,Creating an AI-driven decision engine that prioritizes critical services during network congestion,AdaptiveLoadBalancing,35%
+50,Dynamic spectrum allocation using game theory to optimize network efficiency,DynamicSpectrumAllocation,21%
+51,Implementing a blockchain-based system for decentralized and predictive resource allocation among network nodes,PredictiveResourceRedistribution,13%
+52,Expanding small cell infrastructure in remote areas to improve internet access and reliability,SmallCellDeployment,9%
+53,Utilizing traffic shaping techniques to reduce jitter for live streaming services,LiveStreamingShaping,8%
+55,Adaptive DSA strategy for emergency services to ensure priority and reliability during disasters,DSAEmergencyServices,28%
+57,Coordinated small cell deployment alongside macro cells to address coverage gaps in a coastal region,CoastalCoverageImprovement,26%
+58,Applying traffic shaping techniques to prioritize gaming services during peak hours,QoSEnhancement,11%
+59,Developing an automated network monitoring tool that triggers load balancing actions based on predefined performance thresholds,AdaptiveLoadBalancing,15%
+60,Reducing spectrum fragmentation by reorganizing available channels,DynamicSpectrumAllocation,13%
+61,Adopting a federated learning approach to collectively improve resource allocation strategies across distributed networks,PredictiveResourceRedistribution,10%
+62,Utilizing small cells for offloading traffic from main cell towers during major sporting events,SmallCellDeployment,20%
+63,Deploying traffic policing mechanisms to manage bandwidth usage of non-critical applications,ApplicationPrioritization,5%
+65,Dynamic allocation of spectrum to support remote education and telemedicine services in underserved areas,DSAEducationHealthcare,22%
+67,Integration of small cells with IoT devices in an industrial park to support high-density IoT traffic,IndustrialIoTSupport,20%
+68,Enhancing QoS for mobile edge computing to support edge-based AI applications,QoSEnhancement,14%
+69,Integrating a real-time traffic analysis system with an adaptive load balancer to redistribute traffic and prevent service disruptions,AdaptiveLoadBalancing,30%
+70,Employing cognitive radio technology to identify underutilized frequency bands,DynamicSpectrumAllocation,16%
+71,Creating a simulation model to predict network load and dynamically adjust resources before peak times,PredictiveResourceRedistribution,15%
+72,Strategic placement of small cells in public transportation hubs to cater to the high user density,SmallCellDeployment,18%
+73,Implementing congestion control protocols to reduce packet loss in high-traffic scenarios,CongestionControlImplementation,9%
+75,Implementing DSA for smart city infrastructure to optimize traffic management and public safety services,DSASmartCity,17%
+77,Implementing small cells in a school district to ensure reliable connectivity for educational applications,EducationalConnectivity,24%
+78,Implementing adaptive bitrate streaming to reduce buffering for mobile users,QoSEnhancement,10%
+79,Applying a custom-built algorithm to continuously optimize resource allocation across different network tiers,AdaptiveLoadBalancing,22%
+80,Dynamic spectrum sharing among cellular operators to maximize usage of available spectrum,DynamicSpectrumAllocation,20%
+81,Developing an AI-driven analytics platform to anticipate network congestion and redistribute bandwidth resources,PredictiveResourceRedistribution,12%
+82,Deploying small cells in hospital zones to ensure uninterrupted connectivity for critical healthcare services,SmallCellDeployment,11%
+83,Developing a QoS framework that adapts to varying network conditions,AdaptiveQoSFramework,10%
+87,Small cell deployment in a tourist hotspot to accommodate the high number of visitors during peak seasons,TouristConnectivity,27%
+88,Introducing QoS-aware Wi-Fi offloading to balance load between Wi-Fi and cellular networks,QoSEnhancement,16%
+89,Establishing a decentralized network infrastructure that uses blockchain technology for secure and efficient load distribution,AdaptiveLoadBalancing,27%
+90,Reallocation of spectrum for emergency services to prioritize critical communications,DynamicSpectrumAllocation,15%
+91,Designing a cloud-based service to monitor and predictively manage network resources in real-time,PredictiveResourceRedistribution,13%
+92,Introducing small cells in smart city zones to support IoT devices and real-time data analytics,SmallCellDeployment,14%
+93,Introducing QoS guarantees for cloud services to ensure consistent performance,CloudServiceGuarantee,7%
+97,Small cell installations in residential areas to provide enhanced coverage and capacity for high-demand services,ResidentialServiceEnhancement,32%
+99,Implementing a self-healing network system that automatically adjusts its configuration to maintain optimal performance under varying loads,AdaptiveLoadBalancing,29%
