@@ -8,9 +8,11 @@ import { auth, googleProvider } from "@/firebase";
 export default function HomePage() {
 
 
-  const signInWithGoogle = async () => {
+  const signInWithGoogle = async (event: React.MouseEvent<HTMLButtonElement>) => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      event.preventDefault();
+      const credentials = await signInWithPopup(auth, googleProvider);
+      console.log(credentials)
     } catch (err) {
       console.error(err);
     }
@@ -29,7 +31,7 @@ export default function HomePage() {
       </div>
       <div className="flex gap-4">
 
-        <a href="" onClick={() => signInWithGoogle()} className={buttonVariants()}>
+        <a href="" onClick={(e) => signInWithGoogle(e)} className={buttonVariants()}>
           <Icons.google style={{ marginRight: 10 }} className="h-5 w-5 fill-current" /> Sign up with Google
         </a>
         <a
