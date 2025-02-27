@@ -8,7 +8,7 @@ import { auth, googleProvider } from "@/firebase";
 export default function HomePage() {
 
 
-  const signInWithGoogle = async (event: React.MouseEvent<HTMLButtonElement>) => {
+  const signInWithGoogle = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     try {
       event.preventDefault();
       const credentials = await signInWithPopup(auth, googleProvider);
