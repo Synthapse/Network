@@ -1,0 +1,260 @@
+NetworkFactories for: WIFI_P2P WIFI_UT Ethernet TelephonyNetworkFactory[0] WIFI PhoneSwitcherNetworkRequstListener
+
+Active default network: 507
+
+Current Networks:
+  NetworkAgentInfo{ ni{[type: MOBILE[LTE] - MOBILE, state: CONNECTED/CONNECTED, reason: (unspecified), extra: internet, failover: false, available: true, roaming: false, metered: true]}  network{507}  nethandle{2177564855006}  lp{{InterfaceName: rmnet_data0 LinkAddresses: [10.83.121.9/32,]  Routes: [0.0.0.0/0 -> 10.83.121.10 rmnet_data0,] DnsAddresses: [89.108.195.20,89.108.202.20,] Domains: null MTU: 0 TcpBufferSizes: 524288,1048576,2560000,524288,1048576,2560000}}  nc{[ Transports: CELLULAR Capabilities: SUPL&INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN&VALIDATED&FOREGROUND LinkUpBandwidth>=51200Kbps LinkDnBandwidth>=102400Kbps Specifier: <2>]}  Score{50}  everValidated{true}  lastValidated{true}  created{true} lingering{false} explicitlySelected{false} acceptUnvalidated{false} everCaptivePortalDetected{false} lastCaptivePortalDetected{false} }
+    Requests: REQUEST:17 LISTEN:18 BACKGROUND_REQUEST:0 total:35
+      NetworkRequest [ REQUEST id=1, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=3, [] ]
+      NetworkRequest [ LISTEN id=4, [] ]
+      NetworkRequest [ LISTEN id=5, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=7, [ Transports: CELLULAR|WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=609, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=756, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+      NetworkRequest [ LISTEN id=791, [ Transports: CELLULAR|WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=809, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+      NetworkRequest [ TRACK_DEFAULT id=840, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=841, [ Transports: CELLULAR|WIFI|BLUETOOTH|ETHERNET|VPN Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=842, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=898, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=938, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND] ]
+      NetworkRequest [ LISTEN id=939, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND] ]
+      NetworkRequest [ LISTEN id=943, [ Transports: CELLULAR|WIFI|BLUETOOTH|ETHERNET|VPN Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=953, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=954, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=955, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=961, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=964, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=965, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+      NetworkRequest [ LISTEN id=971, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+      NetworkRequest [ TRACK_DEFAULT id=973, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=974, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=975, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND] ]
+      NetworkRequest [ TRACK_DEFAULT id=976, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=977, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=978, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=979, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=980, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=981, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ LISTEN id=982, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+      NetworkRequest [ TRACK_DEFAULT id=983, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+      NetworkRequest [ TRACK_DEFAULT id=984, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+    Lingered:
+
+Metered Interfaces:
+  rmnet_data0
+
+Restrict background: false
+
+Status for known UIDs:
+  UID=10009 rules=1 (ALLOW_METERED)
+  UID=10143 rules=64 (REJECT_ALL)
+  UID=10160 rules=64 (REJECT_ALL)
+
+Network Requests:
+  uid/pid:1000/681 NetworkRequest [ LISTEN id=6, [ Transports: WIFI Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:1000/681 NetworkRequest [ LISTEN id=3, [] ]
+  uid/pid:10066/19572 NetworkRequest [ TRACK_DEFAULT id=964, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10033/25555 NetworkRequest [ TRACK_DEFAULT id=984, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10044/1600 NetworkRequest [ LISTEN id=4, [] ]
+  uid/pid:10009/14665 NetworkRequest [ LISTEN id=756, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+  uid/pid:10147/22720 NetworkRequest [ LISTEN id=980, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10009/5307 NetworkRequest [ LISTEN id=793, [ Transports: WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10148/25157 NetworkRequest [ TRACK_DEFAULT id=981, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10127/8750 NetworkRequest [ TRACK_DEFAULT id=954, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:1000/681 NetworkRequest [ TRACK_DEFAULT id=609, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10156/3606 NetworkRequest [ TRACK_DEFAULT id=840, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10156/3606 NetworkRequest [ TRACK_DEFAULT id=842, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10121/25168 NetworkRequest [ TRACK_DEFAULT id=976, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10143/24683 NetworkRequest [ TRACK_DEFAULT id=973, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10136/31200 NetworkRequest [ TRACK_DEFAULT id=961, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10148/25157 NetworkRequest [ LISTEN id=975, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND] ]
+  uid/pid:10009/5307 NetworkRequest [ LISTEN id=802, [ Transports: WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:1000/681 NetworkRequest [ LISTEN id=5, [ Transports: CELLULAR Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10033/25555 NetworkRequest [ TRACK_DEFAULT id=983, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10147/22720 NetworkRequest [ LISTEN id=971, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+  uid/pid:10120/29822 NetworkRequest [ LISTEN id=938, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND] ]
+  uid/pid:10009/5307 NetworkRequest [ LISTEN id=889, [ Transports: WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10143/24683 NetworkRequest [ TRACK_DEFAULT id=974, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10120/29822 NetworkRequest [ LISTEN id=939, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND] ]
+  uid/pid:10156/3606 NetworkRequest [ LISTEN id=898, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10009/5307 NetworkRequest [ LISTEN id=792, [ Transports: WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:1000/681 NetworkRequest [ LISTEN id=610, [ Transports: CELLULAR Capabilities: DUN&TRUSTED&NOT_VPN] ]
+  uid/pid:10066/19572 NetworkRequest [ TRACK_DEFAULT id=979, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10148/25157 NetworkRequest [ TRACK_DEFAULT id=978, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10127/8750 NetworkRequest [ TRACK_DEFAULT id=953, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10009/5307 NetworkRequest [ LISTEN id=791, [ Transports: CELLULAR|WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:1000/681 NetworkRequest [ LISTEN id=7, [ Transports: CELLULAR|WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10033/25325 NetworkRequest [ LISTEN id=982, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+  uid/pid:1000/681 NetworkRequest [ REQUEST id=1, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10136/31200 NetworkRequest [ LISTEN id=955, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10136/31200 NetworkRequest [ LISTEN id=943, [ Transports: CELLULAR|WIFI|BLUETOOTH|ETHERNET|VPN Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10066/19572 NetworkRequest [ LISTEN id=965, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+  uid/pid:10148/25157 NetworkRequest [ TRACK_DEFAULT id=977, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10156/3606 NetworkRequest [ LISTEN id=841, [ Transports: CELLULAR|WIFI|BLUETOOTH|ETHERNET|VPN Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  uid/pid:10009/5307 NetworkRequest [ LISTEN id=809, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+
+tcp window buffer size for:
+  lte:524288,1048576,2560000,524288,1048576,2560000
+
+mLegacyTypeTracker:
+  Supported types: 0 1 2 3 4 5 7 9 10 11 12 13 14 15 17 23 24 27 28
+  Current state:
+    0 NetworkAgentInfo [MOBILE (LTE) - 507] CONNECTED/CONNECTED
+
+mNetTransitionWakeLock: currently not held, last requested for NetworkAgentInfo [MOBILE (LTE) - 506]
+
+Tethering:
+  mUpstreamIfaceTypes: MOBILE WIFI MOBILE_HIPRI BLUETOOTH ETHERNET
+  Tether state:
+    wlan0 - TetheredState - lastError = 0
+
+Packet keepalives:
+
+Bad Wi-Fi avoidance: unrestricted
+
+
+mValidationLogs (most recent first):
+511 - mms
+  02-26 19:06:02.788 - Network would not satisfy default request, not validating
+510 - mms
+  02-26 19:05:19.322 - Network would not satisfy default request, not validating
+509 - mms
+  02-26 19:05:11.041 - Network would not satisfy default request, not validating
+508 - mms
+  02-26 19:04:57.270 - Network would not satisfy default request, not validating
+507 - internet
+506 - internet
+505 - mms
+  02-22 13:41:13.148 - Network would not satisfy default request, not validating
+504 - mms
+  02-21 22:11:01.827 - Network would not satisfy default request, not validating
+503 - mms
+  02-21 22:10:00.310 - Network would not satisfy default request, not validating
+502 - mms
+  02-21 19:26:58.679 - Network would not satisfy default request, not validating
+
+mNetworkRequestInfoLogs (most recent first):
+  02-26 20:01:58.960 - REGISTER uid/pid:10033/25555 NetworkRequest [ TRACK_DEFAULT id=984, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:47.757 - REGISTER uid/pid:10033/25555 NetworkRequest [ TRACK_DEFAULT id=983, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:44.135 - REGISTER uid/pid:10033/25325 NetworkRequest [ LISTEN id=982, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+  02-26 20:01:42.429 - REGISTER uid/pid:10148/25157 NetworkRequest [ TRACK_DEFAULT id=981, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:42.325 - REGISTER uid/pid:10147/22720 NetworkRequest [ LISTEN id=980, [ Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:39.846 - REGISTER uid/pid:10066/19572 NetworkRequest [ TRACK_DEFAULT id=979, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:38.117 - REGISTER uid/pid:10148/25157 NetworkRequest [ TRACK_DEFAULT id=978, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:35.112 - REGISTER uid/pid:10148/25157 NetworkRequest [ TRACK_DEFAULT id=977, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:34.389 - REGISTER uid/pid:10121/25168 NetworkRequest [ TRACK_DEFAULT id=976, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:01:33.166 - REGISTER uid/pid:10148/25157 NetworkRequest [ LISTEN id=975, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&FOREGROUND] ]
+  02-26 20:00:19.355 - REGISTER uid/pid:10143/24683 NetworkRequest [ TRACK_DEFAULT id=974, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 20:00:18.662 - REGISTER uid/pid:10143/24683 NetworkRequest [ TRACK_DEFAULT id=973, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 19:56:00.780 - RELEASE uid/pid:1000/681 NetworkRequest [ REQUEST id=972, legacyType=3, [ Transports: CELLULAR Capabilities: SUPL&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 19:56:00.371 - REGISTER uid/pid:1000/681 NetworkRequest [ REQUEST id=972, legacyType=3, [ Transports: CELLULAR Capabilities: SUPL&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 19:55:17.483 - RELEASE uid/pid:10121/20498 NetworkRequest [ TRACK_DEFAULT id=968, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 19:55:17.481 - RELEASE uid/pid:10121/20498 NetworkRequest [ LISTEN id=970, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+  02-26 19:55:08.463 - RELEASE uid/pid:10143/20491 NetworkRequest [ TRACK_DEFAULT id=966, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 19:55:08.446 - RELEASE uid/pid:10143/20491 NetworkRequest [ TRACK_DEFAULT id=967, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+  02-26 19:54:18.608 - REGISTER uid/pid:10147/22720 NetworkRequest [ LISTEN id=971, [ Capabilities: INTERNET&NOT_RESTRICTED&TRUSTED] ]
+  02-26 19:49:43.430 - RELEASE uid/pid:5009/17653 NetworkRequest [ LISTEN id=962, [ Transports: CELLULAR|WIFI Capabilities: NOT_RESTRICTED&TRUSTED&NOT_VPN] ]
+
+mNetworkInfoBlockingLogs (most recent first):
+  02-26 20:01:43.481 - UNBLOCKED 10033
+  02-26 20:01:42.319 - UNBLOCKED 10147
+  02-26 19:58:17.245 - BLOCKED 10165
+  02-26 19:56:01.279 - UNBLOCKED 10165
+  02-26 19:56:01.029 - UNBLOCKED 10098
+  02-26 19:56:00.991 - UNBLOCKED 10149
+  02-26 19:53:21.257 - BLOCKED 10143
+  02-26 19:52:01.734 - BLOCKED 10165
+  02-26 19:46:52.574 - UNBLOCKED 10121
+  02-26 19:46:47.597 - UNBLOCKED 10143
+  02-26 19:46:45.865 - UNBLOCKED 10165
+  02-26 19:46:10.807 - UNBLOCKED 10136
+  02-26 19:45:57.288 - UNBLOCKED 10156
+  02-26 19:40:39.909 - BLOCKED 10156
+  02-26 19:40:39.834 - BLOCKED 10136
+  02-26 19:30:51.701 - UNBLOCKED 10136
+  02-26 19:30:51.699 - UNBLOCKED 10127
+  02-26 19:30:51.691 - UNBLOCKED 10148
+  02-26 19:30:33.147 - UNBLOCKED 10156
+  02-26 19:30:14.955 - BLOCKED 10127
+  02-26 19:30:14.936 - BLOCKED 10147
+  02-26 19:22:29.030 - BLOCKED 10148
+  02-26 19:18:16.265 - BLOCKED 10164
+  02-26 19:18:15.971 - BLOCKED 10136
+  02-26 19:18:15.956 - BLOCKED 10156
+  02-26 19:05:26.716 - UNBLOCKED 10136
+  02-26 19:04:57.262 - UNBLOCKED 10147
+  02-26 19:04:36.101 - UNBLOCKED 10156
+  02-26 19:04:34.941 - UNBLOCKED 10127
+  02-26 19:04:34.929 - UNBLOCKED 10148
+  02-26 19:00:50.150 - BLOCKED 10156
+  02-26 18:59:46.715 - BLOCKED 10148
+  02-26 18:59:46.695 - BLOCKED 10127
+  02-26 18:59:45.974 - BLOCKED 10136
+  02-26 18:57:16.412 - UNBLOCKED 10136
+  02-26 18:56:40.770 - UNBLOCKED 10156
+  02-26 18:54:18.304 - BLOCKED 10136
+  02-26 18:54:16.608 - UNBLOCKED 10136
+  02-26 18:49:02.238 - BLOCKED 10156
+  02-26 18:49:02.144 - BLOCKED 10136
+  02-26 18:42:01.162 - UNBLOCKED 10136
+  02-26 18:42:01.127 - UNBLOCKED 10156
+  02-26 18:40:23.607 - UNBLOCKED 10164
+  02-26 18:37:09.888 - BLOCKED 10033
+  02-26 18:34:25.406 - BLOCKED 10164
+  02-26 18:30:28.820 - UNBLOCKED 10164
+  02-26 18:15:10.030 - UNBLOCKED 10127
+  02-26 18:15:06.433 - UNBLOCKED 10033
+  02-26 17:58:23.723 - BLOCKED 10033
+  02-26 17:58:18.112 - UNBLOCKED 10033
+  02-26 17:31:01.941 - UNBLOCKED 10176
+  02-26 17:30:58.948 - BLOCKED 10164
+  02-26 17:25:05.514 - UNBLOCKED 10164
+  02-26 17:24:20.435 - BLOCKED 10156
+  02-26 17:24:14.417 - BLOCKED 10136
+  02-26 17:24:14.384 - BLOCKED 10164
+  02-26 17:17:51.705 - UNBLOCKED 10136
+  02-26 17:14:45.549 - UNBLOCKED 10164
+  02-26 16:54:07.071 - BLOCKED 10176
+  02-26 16:48:42.099 - UNBLOCKED 10176
+  02-26 16:39:44.086 - BLOCKED 10033
+  02-26 16:35:57.976 - BLOCKED 10164
+  02-26 16:29:29.691 - UNBLOCKED 10164
+  02-26 16:28:55.784 - BLOCKED 10164
+  02-26 16:27:00.425 - UNBLOCKED 10164
+  02-26 16:25:48.814 - BLOCKED 10136
+  02-26 16:23:55.339 - UNBLOCKED 10033
+  02-26 16:23:53.672 - UNBLOCKED 10136
+  02-26 16:23:47.814 - UNBLOCKED 10148
+  02-26 16:06:23.958 - BLOCKED 10120
+  02-26 16:06:20.547 - UNBLOCKED 10120
+  02-26 16:05:51.600 - BLOCKED 10045
+  02-26 16:05:48.998 - BLOCKED 10143
+  02-26 16:05:47.111 - BLOCKED 10121
+  02-26 16:05:43.805 - BLOCKED 10098
+  02-26 16:05:43.794 - BLOCKED 10120
+  02-26 16:05:43.739 - BLOCKED 10127
+  02-26 16:05:43.652 - BLOCKED 10149
+  02-26 16:05:43.617 - BLOCKED 10147
+  02-26 16:05:40.247 - BLOCKED 10164
+  02-26 15:52:01.670 - BLOCKED 10107
+  02-26 15:51:18.402 - BLOCKED 10136
+  02-26 15:51:18.366 - BLOCKED 10033
+  02-26 15:51:07.084 - UNBLOCKED 10136
+  02-26 15:48:07.710 - BLOCKED 10136
+  02-26 15:46:10.560 - UNBLOCKED 10136
+  02-26 15:46:10.446 - UNBLOCKED 10156
+  02-26 15:37:40.271 - BLOCKED 10156
+  02-26 15:36:01.693 - UNBLOCKED 10156
+  02-26 15:23:33.276 - BLOCKED 10148
+  02-26 15:21:24.317 - BLOCKED 10156
+  02-26 15:21:15.435 - UNBLOCKED 10164
+  02-26 15:20:20.149 - BLOCKED 10136
+  02-26 15:19:12.352 - UNBLOCKED 10156
+  02-26 15:19:12.318 - UNBLOCKED 10136
+  02-26 15:04:11.407 - BLOCKED 10164
+  02-26 15:01:13.412 - UNBLOCKED 10164
+  02-26 14:47:16.428 - UNBLOCKED 10148
+  02-26 14:32:14.760 - BLOCKED 10164
+  02-26 14:29:56.595 - BLOCKED 10148

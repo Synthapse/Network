@@ -6,11 +6,16 @@ Develop AI-driven tools that improve decentralized network performance and scala
 1. Network.AI
 2. Network.Data
 3. Network.Frontend
-4. Network.Infrastracture
-5. Network.Backend
+4. Network.Backend
 
 
-23.02.2025 (PZ)
+Experimental:
+5. Network.Infrastracture
+
+
+
+
+
 
 - Cost preparation (how much will it cost to run the project in GCP weekly/monthly)
    - Kafka, Kafka Exporter, Grafana, Prometheus
@@ -44,17 +49,7 @@ Next Deployment steps further:
 5. verify logs
 6. connect grafana to kafka
 
-## 1. Network Protocols
 
-### TCP Alternatives:
-
-- **HOMA/QUIC** ([Quicly](https://github.com/h2o/quicly/))
-- **RINA** (Recursive InterNetwork Architecture) - Future internet architectures
-- **NDN** (Named Data Networking) - Future decentralized networking
-- **DCCP** (Datagram Congestion Control Protocol) - Video Streaming, Gaming
-- **SCTP** (Stream Control Transmission Protocol) - 5G
-
----
 
 ## 2. Optimization Techniques
 
