@@ -20,7 +20,7 @@ const Contact = () => {
           Norah Alsuqayhi
         </p>
         <button className={buttonVariants()} onClick={() => window.location.href = "mailto:synthapseai@gmail.com"}>
-          Send mail to our team
+          Send mail
         </button>
       </div>
     </section>

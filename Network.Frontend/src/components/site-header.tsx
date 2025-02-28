@@ -43,9 +43,9 @@ export function SiteHeader() {
                   <span className="sr-only">Twitter</span>
                 </div>
               </a>
-                        <a style={{ float: 'right' }} href={siteConfig.links.docs} className={buttonVariants({ variant: "outline" })}>
-            Try a demo
-          </a>
+              <a style={{ float: 'right' }}className={buttonVariants({ variant: "outline" })}>
+                Try a demo
+              </a>
               <ThemeToggle />
             </nav>
           </div>

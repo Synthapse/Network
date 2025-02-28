@@ -121,7 +121,7 @@ export default function HomePage() {
               <h2 className="text-xl font-bold">02 Multi-agent system</h2>
               <ul style={{ marginTop: '20px' }} className="text-blue-500">
                 <li>Smart automation</li>
-                <li>Four network of AI Agents</li>
+                <li>Network of Three AI Agents</li>
                 <li>Consultation & Planning</li>
               </ul>
             </div>
