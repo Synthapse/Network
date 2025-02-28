@@ -1,8 +1,19 @@
+import { useEffect, useState } from 'react';
 import graph from '../assets/graph.png'
-// import htmlContent from "./london_broadband_map.html"; // Webpack or Vite loads it as a string
+//import htmlContent from "./london_broadband_map.html"; // Webpack or Vite loads it as a string
 
 
 const London = () => {
+
+  const [htmlContent, setHtmlContent] = useState("");
+
+  useEffect(() => {
+    fetch("/london_broadband_map.html") // Load from public/
+      .then((response) => response.text())
+      .then((data) => setHtmlContent(data))
+      .catch((error) => console.error("Error loading HTML:", error));
+  }, []);
+
   return (
 
     <section className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
@@ -13,7 +24,7 @@ const London = () => {
 
         <p className="text-lg text-muted-foreground">
           We focused on London for PoC - cause it’s the most developed smart city with the network infrastracture.
-          And from that point for development is great for One Replication Strategy The London Smart City Optimization project enhances urban infrastructure using AI, IoT, and cybersecurity. The focus areas include This initiative ensures London remains a sustainable, secure, and efficient smart city.
+          And from that point for development is great for One Replication Strategy the London Smart City Optimization project enhances urban infrastructure using AI, IoT, and cybersecurity. The focus areas include This initiative ensures London remains a sustainable, secure, and efficient smart city.
         </p>
 
         <img src={graph} />
@@ -38,11 +49,13 @@ const London = () => {
           And from that point for development is great for <a className="text-blue-500" href="https://sharingcities.eu/wp-content/uploads/sites/6/2022/07/D5-01-One-replication-strategy.pdf">One Replication Strategy</a> The London Smart City Optimization project enhances urban infrastructure using AI, IoT, and cybersecurity. The focus areas include This initiative ensures London remains a sustainable, secure, and efficient smart city.
         </p>
 
+        <hr/>
 
-        {/* 
-        PZ - i will fix it later
-        
-        <div dangerouslySetInnerHTML={{ __html: htmlContent }} /> */}
+        <p className="text-lg text-muted-foreground">
+          Map of London network usage - based on 2021 data - separated via districts
+        </p>
+
+        <iframe src="/london_broadband_map.html" width="100%" height="600px" title="Embedded HTML"></iframe>
       </div>
     </section >
   )
