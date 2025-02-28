@@ -12,6 +12,7 @@ import { Icons } from "./icons";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/firebase";
 
+
 export default function HomePage() {
 
   const signInWithGoogle = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
@@ -47,12 +48,6 @@ export default function HomePage() {
           />{" "}
           Sign up with Google
         </a>
-        <a
-          href={siteConfig.links.github}
-          className={buttonVariants({ variant: "outline" })}
-        >
-          Contact
-        </a>
       </div>
       <img src={iot} />
       <div className="flex flex-wrap md:flex-nowrap justify-between items-center mt-9 gap-4">
@@ -86,7 +81,7 @@ export default function HomePage() {
       </div>
 
       <div className="mt-10 p-5">
-        <div className="flex flex-wrap justify-center md:justify-between items-center gap-4 mt-10">
+        <div style={{ backgroundColor: "#F0F1F4", width: '100%' }} className="flex flex-wrap justify-center md:justify-between items-center">
           <img src={AgentsImg} alt="Agent" />
           <img src={NetworkAgents} alt="Network" />
         </div>
@@ -98,13 +93,13 @@ export default function HomePage() {
         </h1>
 
         <div className="mt-7">
-          <p className="mb-2 text-xl">
+          <p className="text-lg text-muted-foreground">
             This process takes 1-3 business days before signing an agreement.
           </p>
-          <p className="mb-2 text-xl">
+          <p className="text-lg text-muted-foreground">
             Instead of 3-6 weeks of specification and gathering requirements.
           </p>
-          <p className="mb-2 text-xl">
+          <p className="text-lg text-muted-foreground">
             You get a full specification for free & decide whether to continue
             with implementation and pilot deployment.
           </p>
@@ -115,7 +110,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6 text-center md:text-left items-center">
             <div>
               <h2 className="text-xl font-bold">01 Research</h2>
-              <ul className="text-blue-500">
+              <ul style={{ marginTop: '20px' }} className="text-blue-500">
                 <li>Infrastructure assessment</li>
                 <li>AI feasibility study</li>
                 <li>Efficiency & security analysis</li>
@@ -124,7 +119,7 @@ export default function HomePage() {
 
             <div>
               <h2 className="text-xl font-bold">02 Multi-agent system</h2>
-              <ul className="text-blue-500">
+              <ul style={{ marginTop: '20px' }} className="text-blue-500">
                 <li>Smart automation</li>
                 <li>Four network of AI Agents</li>
                 <li>Consultation & Planning</li>
@@ -133,7 +128,7 @@ export default function HomePage() {
 
             <div>
               <h2 className="text-xl font-bold">03 Supervisor agent</h2>
-              <ul className="text-blue-500">
+              <ul style={{ marginTop: '20px' }} className="text-blue-500">
                 <li>Agent input critique</li>
                 <li>Generate weak-points</li>
                 <li>Verify potential</li>
@@ -142,7 +137,7 @@ export default function HomePage() {
 
             <div>
               <h2 className="text-xl font-bold">04 Contract proposal</h2>
-              <ul className="text-blue-500">
+              <ul style={{ marginTop: '20px' }} className="text-blue-500">
                 <li>Prototype implementation</li>
                 <li>Pilot deployment</li>
                 <li>Ongoing optimization</li>
