@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Network.Backend/ns-3-dev" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Network.Backend/ns-3-dev/ns-allinone-3.42/ns-3.42/src/lorawan" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Network.Backend/stack" vcs="Git" />
   </component>
 </project>

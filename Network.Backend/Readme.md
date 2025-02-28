@@ -1,13 +1,84 @@
 ## 1. Network Protocols
 
-Sending Packets:
+# NS-3 & NetAnim
+https://www.projectguideline.com/visualizing-ns-3-simulation-using-netanim/
 
-- not need TLS
+
+**Simulate point-to point in TCP/IP**
+
+
+- MaxPackets (1)
+- Interval (1.0)
+- PacketSize (1024)
+___
+
+- At time +2s client sent 1024 bytes to 10.1.2.4 port 9
+- At time +2.00926s server received 1024 bytes from 10.1.3.3 port 49153
+- At time +2.00926s server sent 1024 bytes to 10.1.3.3 port 49153
+- At time +2.02449s client received 1024 bytes from 10.1.2.4 port 9
+
+____
+
+
+https://signetlabdei.github.io/lorawan/models/build/html/lorawan.html#lorawan-topology
+
+
+> IEEE 802.15.4 (LR-WPAN) -> 6LoWPAN
+> 
+> Cellular IoT (Long-Range) (NB-IoT, Cat-M1, etc.).
+> 
+> WIFI (802.11) -> 802.11ah (Sub-1 GHz)
+> 
+ 
+
+
+# Lorawan
+> LoRaWAN (Long-Range, Low Power)
+
+https://www.projectguideline.com/installing-lorawan-extension-module-version-v0-3-1-under-ns-3-42/
+
+- End Devices (EDs), 
+- Gateways (GWs) 
+- Network Server (NS).
+
+PHY Layer -> The PHY (Physical) Layer is the lowest layer in the network protocol stack and is responsible for the actual transmission and reception of data over a physical medium.
+
+1. Initializing the Network
+2. Creating the End Device (LoRaWAN Node)
+3. Creating the Gateway
+4. Preparing the Transmission
+
+- OneShotSender:OneShotSender()
+- EndDeviceLorawanMac:SetDataRate(..., 5)
+- EndDeviceLorawanMac:GetChannelForTx(): Chooses a transmission frequency (e.g., 868.3 MHz`)
+
+5. Packet Transmission
+
+- LoraFrameHeader:Serialize()
+- LorawanMacHeader:Serialize()
+- ClassAEndDeviceLorawanMac:SendToPhy()
+- LoraPhy:GetOnAirTime(...)
+
+
+
+
+
+
+
+./ns3 run third
+
+
+WiFi
+
+-> Access Point
+-> Station
+
+_____
 
 
 **RINA** (Recursive InterNetwork Architecture)
 
-
+-> not need TLS
 -> more than 1000 times faster than TCP/IP 
 -> not need TLS
 
@@ -32,12 +103,10 @@ Security mechanisms: Internet – 28; RINA – 7
 
 https://www.martingeddes.com/think-tank/network-architecture-research-tcp-ip-vs-rina/
 
-# NS-3
-
 https://www.nsnam.com/2024/08/ns3-installation-in-mac-m1.html
 
 `
-brew install cmake ninja gnuplot ccache 
+brew install cmake ninja gnuplot cache 
 
 brew install wget
 wget https://www.nsnam.org/releases/ns-allinone-3.42.tar.bz2
@@ -60,48 +129,19 @@ Recursion instead fixed layers.
 - RINASim in OMNeT++ (for simulations)
 
 
-OMNeT++ uses Bison to parse its NED (Network Description) files
-Bison then generates a C parser to process this rule.
-require Bison >3.0
-
-
-`arch -arm64 brew install bison`
-
-`echo 'export PATH="/usr/local/opt/bison/bin:$PATH"' >> ~/.zshrc
-source ~/.zshrc`
 
 
 
-`cd omnetpp-6.0.1`
-
-
-`
-source setenv
-./configure
-make -j$(nproc)
-`
-
-OMNeT++ supports numpy (>=1.18.0, <2.0.0)
-downgrade numpy: pip install "numpy<2.0.0,>=1.18.0"
-
-depends on arch
-
-arm64 installation
-arch -arm64 pip install "numpy>=1.18.0,<2.0.0"
-
-x86_64 installation
-arch -x86_64 pip install numpy
-
-brew install cmake
-
-
-on Mac: 
-`make -j$(sysctl -n hw.ncpu)`
-
-NetworkX with OMNeT++
 
 
 
+
+
+
+
+
+
+_____
 
 
 **NDN** (Named Data Networking)
@@ -116,14 +156,11 @@ Not Ip Addresses.
    c. NS-3
    d OMNeT++
 
-
-
-
 ### TCP Alternatives:
 
 - **HOMA/QUIC** ([Quicly](https://github.com/h2o/quicly/))
--   Future internet architectures (RINA)
--   Future decentralized networking (NDN)
+-   (ok) Future internet architectures (RINA)
+-   (ok) Future decentralized networking (NDN)
 - **DCCP** (Datagram Congestion Control Protocol) - Video Streaming, Gaming
 - **SCTP** (Stream Control Transmission Protocol) - 5G
 

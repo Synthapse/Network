@@ -1,0 +1,269 @@
+SimpleLorawanNetworkExample:main(): Creating the channel...
++0.000000000s -1 SimpleLorawanNetworkExample:main(): Setting up helpers...
++0.000000000s -1 LoraPhyHelper:LoraPhyHelper(0x16efab058)
++0.000000000s -1 SimpleLorawanNetworkExample:main(): Creating the end device...
++0.000000000s -1 LoraPhyHelper:SetDeviceType(0x16efab058, 1)
++0.000000000s -1 LorawanMacHelper:SetDeviceType(0x16efab020, 1)
++0.000000000s -1 LoraHelper:Install()
++0.000000000s -1 LoraPhyHelper:Create(0x16efab058, 0, 0x6000001302a0)
++0.000000000s -1 LoraInterferenceHelper:LoraInterferenceHelper(0x13660c500)
++0.000000000s -1 LoraInterferenceHelper:SetCollisionMatrix(): Setting the GOURSAUD collision matrix
++0.000000000s -1 LoraPhy:SetChannel(0x13660c4b0, 0x600000b35d80)
++0.000000000s -1 LoraPhy:SetDevice(0x13660c4b0, 0x6000001302a0)
++0.000000000s -1 LoraHelper:Install(): Done creating the PHY
++0.000000000s -1 LorawanMac:LorawanMac(0x13660c660)
++0.000000000s -1 EndDeviceLorawanMac:EndDeviceLorawanMac(0x13660c660)
++0.000000000s -1 ClassAEndDeviceLorawanMac:ClassAEndDeviceLorawanMac(0x13660c660)
++0.000000000s -1 LorawanMacHelper:ConfigureForEuRegion()
++0.000000000s -1 LorawanMacHelper:ApplyCommonEuConfigurations()
++0.000000000s -1 LogicalLoraChannelHelper:LogicalLoraChannelHelper(0x600000b35e80)
++0.000000000s -1 LogicalLoraChannelHelper:AddSubBand(0x600000b35e80, 868, 868.6)
++0.000000000s -1 LogicalLoraChannelHelper:AddSubBand(0x600000b35e80, 868.7, 869.2)
++0.000000000s -1 LogicalLoraChannelHelper:AddSubBand(0x600000b35e80, 869.4, 869.65)
++0.000000000s -1 LogicalLoraChannel:LogicalLoraChannel(0x600000634d20)
++0.000000000s -1 LogicalLoraChannel:LogicalLoraChannel(0x600000634d70)
++0.000000000s -1 LogicalLoraChannel:LogicalLoraChannel(0x600000634dc0)
++0.000000000s -1 LogicalLoraChannelHelper:AddChannel(0x600000b35e80, 0x600000634d20)
++0.000000000s -1 LogicalLoraChannelHelper:AddChannel(0x600000b35e80, 0x600000634d70)
++0.000000000s -1 LogicalLoraChannelHelper:AddChannel(0x600000b35e80, 0x600000634dc0)
++0.000000000s -1 LoraHelper:Install(): Done creating the MAC
++0.000000000s -1 LoraHelper:Install(): node=0x600001430000, mob=1000:0:0
++0.000000000s -1 SimpleLorawanNetworkExample:main(): Creating the gateway...
++0.000000000s -1 LoraPhyHelper:SetDeviceType(0x16efab058, 0)
++0.000000000s -1 LorawanMacHelper:SetDeviceType(0x16efab020, 0)
++0.000000000s -1 LoraHelper:Install()
++0.000000000s -1 LoraPhyHelper:Create(0x16efab058, 1, 0x600000131080)
++0.000000000s -1 LoraInterferenceHelper:LoraInterferenceHelper(0x13660c990)
++0.000000000s -1 LoraInterferenceHelper:SetCollisionMatrix(): Setting the GOURSAUD collision matrix
++0.000000000s -1 GatewayLoraPhy:GatewayLoraPhy()
++0.000000000s -1 LoraPhy:SetChannel(0x13660c940, 0x600000b35d80)
++0.000000000s -1 GatewayLoraPhy:AddFrequency(0x13660c940, 868.1)
++0.000000000s -1 GatewayLoraPhy:AddFrequency(0x13660c940, 868.3)
++0.000000000s -1 GatewayLoraPhy:AddFrequency(0x13660c940, 868.5)
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 LoraPhy:SetDevice(0x13660c940, 0x600000131080)
++0.000000000s -1 LoraHelper:Install(): Done creating the PHY
++0.000000000s -1 LorawanMac:LorawanMac(0x1366045c0)
++0.000000000s -1 GatewayLorawanMac:GatewayLorawanMac(0x1366045c0)
++0.000000000s -1 LorawanMacHelper:ConfigureForEuRegion()
++0.000000000s -1 LorawanMacHelper:ApplyCommonEuConfigurations()
++0.000000000s -1 LogicalLoraChannelHelper:LogicalLoraChannelHelper(0x600000b35f00)
++0.000000000s -1 LogicalLoraChannelHelper:AddSubBand(0x600000b35f00, 868, 868.6)
++0.000000000s -1 LogicalLoraChannelHelper:AddSubBand(0x600000b35f00, 868.7, 869.2)
++0.000000000s -1 LogicalLoraChannelHelper:AddSubBand(0x600000b35f00, 869.4, 869.65)
++0.000000000s -1 LogicalLoraChannel:LogicalLoraChannel(0x600000634f50)
++0.000000000s -1 LogicalLoraChannel:LogicalLoraChannel(0x600000634fa0)
++0.000000000s -1 LogicalLoraChannel:LogicalLoraChannel(0x600000634ff0)
++0.000000000s -1 LogicalLoraChannelHelper:AddChannel(0x600000b35f00, 0x600000634f50)
++0.000000000s -1 LogicalLoraChannelHelper:AddChannel(0x600000b35f00, 0x600000634fa0)
++0.000000000s -1 LogicalLoraChannelHelper:AddChannel(0x600000b35f00, 0x600000634ff0)
++0.000000000s -1 LorawanMacHelper:ConfigureForEuRegion(): Resetting reception paths
++0.000000000s -1 GatewayLoraPhy:ResetReceptionPaths(0x13660c940)
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:~ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddFrequency(0x13660c940, 868.1)
++0.000000000s -1 GatewayLoraPhy:AddFrequency(0x13660c940, 868.3)
++0.000000000s -1 GatewayLoraPhy:AddFrequency(0x13660c940, 868.5)
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 GatewayLoraPhy:AddReceptionPath()
++0.000000000s -1 GatewayLoraPhy:ReceptionPath()
++0.000000000s -1 LoraHelper:Install(): Done creating the MAC
++0.000000000s -1 LoraHelper:Install(): node=0x600001430c80, mob=0:0:0
++0.000000000s -1 OneShotSenderHelper:InstallPriv(0x16efaaf10, 0)
++0.000000000s -1 OneShotSender:OneShotSender()
++0.000000000s -1 OneShotSender:SetSendTime(0x600001230370, +2e+09ns)
++0.000000000s -1 LorawanMacHelper:SetSpreadingFactorsUp()
++0.000000000s -1 EndDeviceLorawanMac:SetDataRate(0x13660c660, 5)
++0.000000000s 0 OneShotSender:StartApplication(0x600001230370)
++2.000000000s 0 OneShotSender:SendPacket(0x600001230370)
++2.000000000s 0 EndDeviceLorawanMac:Send(0x13660c660, 0x600000e30070)
++2.000000000s 0 EndDeviceLorawanMac:GetNextTransmissionDelay()
++2.000000000s 0 LogicalLoraChannelHelper:GetEnabledChannelList(0x600000b35e80)
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(0x600000b35e80, 0x600000634d20)
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(): Waiting time: 0
++2.000000000s 0 EndDeviceLorawanMac:GetNextTransmissionDelay(): Waiting time before the next transmission in channel with frequency 868.1 is = 0.
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(0x600000b35e80, 0x600000634d70)
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(): Waiting time: 0
++2.000000000s 0 EndDeviceLorawanMac:GetNextTransmissionDelay(): Waiting time before the next transmission in channel with frequency 868.3 is = 0.
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(0x600000b35e80, 0x600000634dc0)
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(): Waiting time: 0
++2.000000000s 0 EndDeviceLorawanMac:GetNextTransmissionDelay(): Waiting time before the next transmission in channel with frequency 868.5 is = 0.
++2.000000000s 0 ClassAEndDeviceLorawanMac:GetNextClassTransmissionDelay()
++2.000000000s 0 EndDeviceLorawanMac:GetChannelForTx()
++2.000000000s 0 LogicalLoraChannelHelper:GetEnabledChannelList(0x600000b35e80)
++2.000000000s 0 EndDeviceLorawanMac:Shuffle()
++2.000000000s 0 EndDeviceLorawanMac:GetChannelForTx(): Frequency of the current channel: 868.3
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(0x600000b35e80, 0x600000634d70)
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(): Waiting time: 0
++2.000000000s 0 EndDeviceLorawanMac:GetChannelForTx(): Waiting time for current channel = 0
++2.000000000s 0 LogicalLoraChannelHelper:GetTxPowerForChannel()
++2.000000000s 0 EndDeviceLorawanMac:DoSend(0x13660c660)
++2.000000000s 0 EndDeviceLorawanMac:DoSend(): Received a new packet from application. Resetting retransmission parameters.
++2.000000000s 0 EndDeviceLorawanMac:DoSend(): APP packet: 0x600000e30070.
++2.000000000s 0 EndDeviceLorawanMac:ApplyNecessaryOptions()
++2.000000000s 0 LoraFrameHeader:SetAsUplink()
++2.000000000s 0 LoraFrameHeader:SetAdr(0x16efaab40, 0)
++2.000000000s 0 LoraFrameHeader:GetSerializedSize()
++2.000000000s 0 LoraFrameHeader:GetSerializedSize(): LoraFrameHeader serialized size: 8
++2.000000000s 0 LoraFrameHeader:Serialize()
++2.000000000s 0 LoraFrameHeader:Serialize(): Serializing the following data:
++2.000000000s 0 LoraFrameHeader:Serialize(): Address: 0000000|0000000000000000000000000
++2.000000000s 0 LoraFrameHeader:Serialize(): ADR: 0
++2.000000000s 0 LoraFrameHeader:Serialize(): ADRAckReq: 0
++2.000000000s 0 LoraFrameHeader:Serialize(): Ack: 0
++2.000000000s 0 LoraFrameHeader:Serialize(): fPending: 0
++2.000000000s 0 LoraFrameHeader:Serialize(): fOptsLen: 0
++2.000000000s 0 LoraFrameHeader:Serialize(): fCnt: 1
++2.000000000s 0 EndDeviceLorawanMac:DoSend(): Added frame header of size +2.000000000s 0 LoraFrameHeader:GetSerializedSize()
++2.000000000s 0 LoraFrameHeader:GetSerializedSize(): LoraFrameHeader serialized size: 8
+8 bytes.
++2.000000000s 0 EndDeviceLorawanMac:ApplyNecessaryOptions()
++2.000000000s 0 LorawanMacHeader:SetMType(0x16efaab30, 2)
++2.000000000s 0 LorawanMacHeader:SetMajor()
++2.000000000s 0 LorawanMacHeader:GetSerializedSize()
++2.000000000s 0 LorawanMacHeader:Serialize()
++2.000000000s 0 LorawanMacHeader:Serialize(): Serialization of MAC header: 01000001
++2.000000000s 0 ClassAEndDeviceLorawanMac:SendToPhy(): PacketToSend: 0x600000e30070
++2.000000000s 0 LorawanMac:GetSfFromDataRate(0x13660c660, 5)
++2.000000000s 0 LorawanMac:GetBandwidthFromDataRate(0x13660c660, 5)
++2.000000000s 0 EndDeviceLorawanMac:GetChannelForTx()
++2.000000000s 0 LogicalLoraChannelHelper:GetEnabledChannelList(0x600000b35e80)
++2.000000000s 0 EndDeviceLorawanMac:Shuffle()
++2.000000000s 0 EndDeviceLorawanMac:GetChannelForTx(): Frequency of the current channel: 868.1
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(0x600000b35e80, 0x600000634d20)
++2.000000000s 0 LogicalLoraChannelHelper:GetWaitingTime(): Waiting time: 0
++2.000000000s 0 EndDeviceLorawanMac:GetChannelForTx(): Waiting time for current channel = 0
++2.000000000s 0 ClassAEndDeviceLorawanMac:SendToPhy(): PacketToSend: 0x600000e30070
++2.000000000s 0 LoraPhy:GetOnAirTime(0x600000e30070, SF: 7, headerDisabled: false, codingRate: 1, bandwidthHz: 125000, nPreamble: 8, crcEnabled: true, lowDataRateOptimizationEnabled: false))
++2.000000000s 0 LoraPhy:GetOnAirTime(): Packet of size 19 bytes
++2.000000000s 0 LoraPhy:GetOnAirTime(): Time computation: num = 168, den = 28, payloadSymbNb = 38, tSym = 0.001024
++2.000000000s 0 LoraPhy:GetOnAirTime(): tPreamble = 0.012544
++2.000000000s 0 LoraPhy:GetOnAirTime(): tPayload = 0.038912
++2.000000000s 0 LoraPhy:GetOnAirTime(): Total time = 0.051456
++2.000000000s 0 EndDeviceLoraPhy:SwitchToTx()
++2.000000000s 0 LoraPhy:GetMobility()
++2.000000000s 0 LoraChannel:Send(): Starting cycle over all 2 PHYs
++2.000000000s 0 LoraChannel:Send(): Sender mobility: 1000:0:0
++2.000000000s 0 LoraPhy:GetMobility()
++2.000000000s 0 LoraChannel:Send(): Receiver mobility: 0:0:0
++2.000000000s 0 LoraChannel:Send(): Getting node index from NetDevice, since it exists
++2.000000000s 0 LoraChannel:Send(): Scheduling reception of the packet
++2.000000000s 0 LoraPhy:GetOnAirTime(0x600000e30070, SF: 7, headerDisabled: false, codingRate: 1, bandwidthHz: 125000, nPreamble: 8, crcEnabled: true, lowDataRateOptimizationEnabled: false))
++2.000000000s 0 LoraPhy:GetOnAirTime(): Packet of size 19 bytes
++2.000000000s 0 LoraPhy:GetOnAirTime(): Time computation: num = 168, den = 28, payloadSymbNb = 38, tSym = 0.001024
++2.000000000s 0 LoraPhy:GetOnAirTime(): tPreamble = 0.012544
++2.000000000s 0 LoraPhy:GetOnAirTime(): tPayload = 0.038912
++2.000000000s 0 LoraPhy:GetOnAirTime(): Total time = 0.051456
++2.000000000s 0 LogicalLoraChannelHelper:AddEvent(0x600000b35e80, +5.1456e+07ns, 0x600000634d20)
++2.000000000s 0 LogicalLoraChannelHelper:AddEvent(): Time on air: 0.051456
++2.000000000s 0 LogicalLoraChannelHelper:AddEvent(): m_aggregatedDutyCycle: 1
++2.000000000s 0 LogicalLoraChannelHelper:AddEvent(): Current time: 2
++2.000000000s 0 LogicalLoraChannelHelper:AddEvent(): Next transmission on this sub-band allowed at time: 7.09414
++2.000000000s 0 LogicalLoraChannelHelper:AddEvent(): Next aggregated transmission allowed at time 2
++2.000000000s 0 ClassAEndDeviceLorawanMac:SendToPhy(): m_dataRate: 5, m_rx1DrOffset: 0, replyDataRate: 5.
++2.000000000s 0 LorawanMac:GetSfFromDataRate(0x13660c660, 5)
++2.000003336s 1 LoraInterferenceHelper:Add(0x13660c990, 0.051456, -106.5, 7, 0x600000e30070, 868.1)
++2.051456000s 0 EndDeviceLoraPhy:TxFinished(0x13660c4b0, 0x600000e30070)
++2.051456000s 0 EndDeviceLoraPhy:SwitchToStandby()
++2.051456000s 0 ClassAEndDeviceLorawanMac:TxFinished()
++2.051456000s 0 EndDeviceLoraPhy:SwitchToSleep()
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(0x13660c990, 0x60000303acc0)
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Current number of events in LoraInterferenceHelper: 1
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Different channel or same event
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Cumulative Interference Energy: 0
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal power in W: 2.23872e-14
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal energy: 1.15196e-15
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The needed isolation to survive is 6 dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The current SNIR is inf dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Packet survived interference with SF
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Cumulative Interference Energy: 0
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal power in W: 2.23872e-14
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal energy: 1.15196e-15
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The needed isolation to survive is -16 dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The current SNIR is inf dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Packet survived interference with SF
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Cumulative Interference Energy: 0
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal power in W: 2.23872e-14
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal energy: 1.15196e-15
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The needed isolation to survive is -18 dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The current SNIR is inf dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Packet survived interference with SF
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Cumulative Interference Energy: 0
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal power in W: 2.23872e-14
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal energy: 1.15196e-15
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The needed isolation to survive is -19 dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The current SNIR is inf dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Packet survived interference with SF
+
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Cumulative Interference Energy: 0
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal power in W: 2.23872e-14
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal energy: 1.15196e-15
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The needed isolation to survive is -19 dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The current SNIR is inf dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Packet survived interference with SF
+
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Cumulative Interference Energy: 0
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal power in W: 2.23872e-14
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Signal energy: 1.15196e-15
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The needed isolation to survive is -20 dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): The current SNIR is inf dB
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Packet survived interference with SF
+
++2.051459336s 1 LoraInterferenceHelper:IsDestroyedByInterference(): Packet survived all interference
++2.051459336s 1 GatewayLorawanMac:Receive(0x1366045c0, 0x600000e30070)
++2.051459336s 1 LorawanMacHeader:Deserialize()
++2.051459336s 1 LorawanMacHeader:IsUplink()
++2.051459336s 1 GatewayLorawanMac:Receive(): Received packet: 0x600000e30070
++3.051456000s 0 ClassAEndDeviceLorawanMac:OpenFirstReceiveWindow()
++3.051456000s 0 EndDeviceLoraPhy:SwitchToStandby()
++3.051456000s 0 LorawanMac:GetSfFromDataRate(0x13660c660, 5)
++3.051456000s 0 LorawanMac:GetBandwidthFromDataRate(0x13660c660, 5)
++3.059648000s 0 ClassAEndDeviceLorawanMac:CloseFirstReceiveWindow()
++3.059648000s 0 EndDeviceLoraPhy:GetState()
++3.059648000s 0 EndDeviceLoraPhy:SwitchToSleep()
++4.051456000s 0 ClassAEndDeviceLorawanMac:OpenSecondReceiveWindow()
++4.051456000s 0 EndDeviceLoraPhy:GetState()
++4.051456000s 0 EndDeviceLoraPhy:SwitchToStandby()
++4.051456000s 0 ClassAEndDeviceLorawanMac:OpenSecondReceiveWindow(): Using parameters: 869.525Hz, DR0
++4.051456000s 0 LorawanMac:GetSfFromDataRate(0x13660c660, 0)
++4.051456000s 0 LorawanMac:GetSfFromDataRate(0x13660c660, 0)
++4.051456000s 0 LorawanMac:GetBandwidthFromDataRate(0x13660c660, 0)
++4.313600000s 0 ClassAEndDeviceLorawanMac:CloseSecondReceiveWindow()
++4.313600000s 0 EndDeviceLoraPhy:GetState()
++4.313600000s 0 EndDeviceLoraPhy:SwitchToSleep()
++4.313600000s 0 ClassAEndDeviceLorawanMac:CloseSecondReceiveWindow(): We have 8 transmissions left. We were not transmitting confirmed messages.
+OneShotSender:~OneShotSender()
