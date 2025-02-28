@@ -46,6 +46,7 @@ export default function HomePage() {
             className="h-5 w-5 fill-current"
           />{" "}
           Sign up with Google
+        </a>
         <a
           href={siteConfig.links.github}
           className={buttonVariants({ variant: "outline" })}
@@ -157,7 +158,7 @@ export default function HomePage() {
           <img src={img3} alt="Innovation & Infrastructure" />
         </div>
       </div>
-      
+
     </section>
   );
 }
