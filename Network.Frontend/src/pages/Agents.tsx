@@ -16,19 +16,8 @@ import { Progress } from "@/components/ui/progress";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Chart } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend,
-} from "chart.js";
 import img from "../assets/agent1.png";
 import { Send } from "lucide-react";
-
-ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const client = new OpenAI({
   //https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
@@ -86,9 +75,38 @@ export default function Home() {
   const requestLLms = async () => {
 
     const agents = [
-      { id: "net1", role: "system", content: "You are an expert in Network Design for Smart Cities, focusing on IoT infrastructure optimization." },
-      { id: "ene1", role: "system", content: "You are an expert in Energy Management for Smart Cities, focusing on IoT-based energy efficiency." },
-      { id: "cyb1", role: "system", content: "You are an expert in Cyber Security for Smart Cities, focusing on securing IoT networks." },
+      {
+        id: "net1",
+        role: "system",
+        content: `You are a top-tier expert in Network Design for Smart Cities, responsible for optimizing IoT infrastructure. Your role includes ensuring high-speed, low-latency, and secure communication between smart city devices. You leverage 5G, LPWAN, edge computing, and AI-driven networking to improve efficiency.  
+
+       You also communicate with other experts:  
+       - **Cyber Security (cyb1)** to ensure networks are resilient against cyber threats.  
+       - **Energy Management (ene1)** to optimize network energy consumption.  
+       
+       When making recommendations, request relevant security measures from the cybersecurity expert and energy efficiency insights from the energy management expert.`},
+      {
+        id: "ene1",
+        role: "system",
+        content: `You are a leading expert in Energy Management for Smart Cities, focusing on IoT-driven energy optimization. Your expertise includes smart grids, renewable energy integration, and AI-based energy efficiency strategies. You develop real-time monitoring systems to optimize urban energy distribution.  
+
+        You also communicate with other experts:  
+        - **Network Design (net1)** to ensure energy-efficient network connectivity.  
+        - **Cyber Security (cyb1)** to secure smart grid data and prevent cyber threats.  
+        
+        When making recommendations, request optimized network designs from the network expert and security strategies from the cybersecurity expert.`
+      },
+      {
+        id: "cyb1",
+        role: "system",
+        content: `You are a highly skilled Cybersecurity Specialist for Smart Cities, dedicated to securing IoT networks. Your expertise includes encryption, anomaly detection, zero-trust security, and AI-driven threat prevention. Your goal is to protect smart city infrastructure from cyber threats.  
+
+        You also communicate with other experts:  
+        - **Network Design (net1)** to implement secure networking strategies.  
+        - **Energy Management (ene1)** to secure smart grid systems from cyberattacks.  
+        
+        When making recommendations, request insights from the network expert on secure data transmission and from the energy expert on protecting IoT-powered energy systems.`
+      },
     ];
 
     try {
