@@ -11,6 +11,7 @@ import { signInWithPopup } from "firebase/auth";
 import { buttonVariants } from "@/components/ui/button";
 import { auth, provider } from "@/lib/firebase";
 import Image from "next/image";
+import { ThemeToggle } from "../components/ThemeToggle";
 
 export default function HomePage() {
   const signInWithGoogle = async () => {
@@ -45,6 +46,7 @@ export default function HomePage() {
         >
           Contact
         </a>
+        <ThemeToggle />
       </div>
       <Image src={iot} alt="Iot" />
       <div className="flex flex-wrap md:flex-nowrap justify-between items-center mt-9 gap-4">
