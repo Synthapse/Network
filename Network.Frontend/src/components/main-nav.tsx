@@ -11,11 +11,11 @@ interface MainNavProps {
 export function MainNav({ items }: MainNavProps) {
   return (
     <div className="flex gap-6 md:gap-10">
-      <a href="/" className="flex items-center space-x-2">
+      <Link to="/" className="flex items-center space-x-2">
 
         <img style={{ width: '42px' }} src={logo} />
 
-      </a>
+      </Link>
       {items?.length ? (
         <nav className="flex gap-6">
           {items?.map(
