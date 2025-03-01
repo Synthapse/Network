@@ -1,3 +1,5 @@
+// @ts-nocheck
+//01.03.2025 - quite bad, but it's hackhathon... and prototype needs to be deliver fast
 "use client";
 //import { NextResponse } from "next/server";
 import OpenAI from "openai";

@@ -16,7 +16,7 @@ import { auth, googleProvider } from "@/firebase";
 export default function HomePage() {
 
   const [isUserAuth, setIsUserAuth] = useState(false);
-  const [credentials, setCredentials] = useState(null);
+  const [credentials, setCredentials] = useState<any>(null);
 
   const signInWithGoogle = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     try {
@@ -52,17 +52,22 @@ export default function HomePage() {
             Try demo
           </a></>
           :
-          <a
-            href=""
-            onClick={(e) => signInWithGoogle(e)}
-            className={buttonVariants()}
-          >
-            <Icons.google
-              style={{ marginRight: 10 }}
-              className="h-5 w-5 fill-current"
-            />{" "}
-            Sign up with Google To try demo
-          </a>
+          <div>
+            <a
+              href=""
+              onClick={(e) => signInWithGoogle(e)}
+              className={buttonVariants()}
+            >
+              <Icons.google
+                style={{ marginRight: 10 }}
+                className="h-5 w-5 fill-current"
+              />{" "}
+              Sign up with Google
+            </a>
+            {!isUserAuth &&
+              <p>After creating account you will have access to premium MVP multi agent system for free</p>
+            }
+          </div>
         }
       </div>
       <img src={iot} />
