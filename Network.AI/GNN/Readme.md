@@ -1,3 +1,22 @@
+## 1. Graph Neural Networks (GNN)
+
+- **Training model for network distribution**
+- **Seeding every node in the graph with real internet data**
+- **Data Streaming with Kafka** for real-time communication between nodes
+- **Each node acts as both producer and consumer**, reporting current usage at intervals (1 month, 1 week, 1 hour, 1 minute)
+
+
+## 2. GIS Data & Interference Models (Kenya)
+
+- [GIS Data](https://www.wri.org/data/kenya-gis-data#agriculture)
+- [User Density Maps](https://data.humdata.org/dataset/highresolutionpopulationdensitymaps-ken)
+- **Interference Models**
+
+---
+
+
+
+
 Random tensor (per features)
 
 mb_available | mb_usage_last_quarter | bandwidth | latency

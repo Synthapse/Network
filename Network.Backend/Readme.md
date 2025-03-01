@@ -1,5 +1,12 @@
 ## 1. Network Protocols
 
+
+![protocols.png](protocols.png)
+
+<hr/>
+
+![tcpvsquicly.png](tcpvsquicly.png)
+
 # NS-3 & NetAnim
 https://www.projectguideline.com/visualizing-ns-3-simulation-using-netanim/
 

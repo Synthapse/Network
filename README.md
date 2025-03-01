@@ -1,118 +1,78 @@
 # Network/Energy Optimization Project (IoT)
 
-Develop AI-driven tools that improve decentralized network performance and scalability.
+Develop AI-driven tools to improve decentralized network performance and scalability.
 
+## Components:
+1. **Network.AI**
+2. **Network.Data**
+3. **Network.Frontend**
+4. **Network.Backend**
 
-1. Network.AI
-2. Network.Data
-3. Network.Frontend
-4. Network.Backend
-
-
-Experimental:
-5. Network.Infrastracture
-
-
-
-
-
-
-- Cost preparation (how much will it cost to run the project in GCP weekly/monthly)
-   - Kafka, Kafka Exporter, Grafana, Prometheus
-   
-
----
-
-
-gcloud config set project cognispace
-gcloud config set account coginspace@cognispace.iam.gserviceaccount.com
-
-gcloud artifacts repositories add-iam-policy-binding kafka \
-  --location=europe-central2 \
-  --project=voicesense \
-  --member="allUsers" \
-  --role="roles/artifactregistry.writer"
-
-
-19.02.2025 Note
-For scalability/maintanability kafka and zookeeper needs to be separated...
-
-🔴 Kafka is NOT designed to run on Cloud Run!
-Deploy Kafka on a GCE Virtual Machine 
-
-Next Deployment steps further:
-
-1. remove Dockerfile.kafka, Dockerfile.kafka-exporter
-2. remove workflow for kafka-exporter
-3. verify kafka-exporter & kafka in GCE
-4. send request from localhost solution to kafka
-5. verify logs
-6. connect grafana to kafka
-
-
-
-## 2. Optimization Techniques
-
-### AI-Based Optimization:
-
+## Macro Scale (Entire Network)
 - **Particle Swarm Optimization (PSO)**
 - **Ant Colony Optimization (ACO)**
-
-### Use Cases:
-
 - **Optimizing WiFi Tower Placement** (PSO + GNN)
 - **Finding Best Routing Paths for Connectivity** (ACO + GNN)
 - **Load Balancing in Networks** (GNN helps ACO/PSO balance traffic)
 - **Autonomous Drone-Based Signal Boosting** (ACO finds best signal relay points)
 
----
+## Micro Scale (Individual Nodes)
+- **ns3 Simulations**
 
-## 3. CI/CD for Demonstration
 
-### Components:
+### AI Hackathon Data:
+- [Notion Page](https://balanced-airmail-b72.notion.site/AI-Hackhathon-181529bf8e08803db16acb72d0f899ef?pvs=74)
 
-- **Zookeeper**
-- **Kafka (1 Instance)**
-- **Simulator** (API?)
-- **UI** (Admin Panel)
-
-### Note for Tomorrow (25.01.2025) - 5 Terminals:
-
-1. ZooKeeper
-2. Kafka
-3. Prometheus
-4. Kafka-Export
-5. Grafana
+### Experimental
+**Network.Infrastructure**
 
 ---
 
-## 4. GIS Data & Interference Models (Kenya)
+## Infrastructure Cost:
 
-- [GIS Data](https://www.wri.org/data/kenya-gis-data#agriculture)
-- [User Density Maps](https://data.humdata.org/dataset/highresolutionpopulationdensitymaps-ken)
-- **Interference Models**
+Google Cloud Pricing Calculators:
+- [Cloud Calculator Link 1](https://cloud.google.com/products/calculator?hl=en&dl=CjhDaVJoWWpsaFlXSTFOeTB6Wm1SaExUUXlNelV0T0RrMk9TMDNNREkxT0RGa09EWTNOemdRQWc9PRAuGiQ2MDQ4QTJFNC1GRkUxLTQ5OTItOTQ2NC0zNTgxMTkzRDkwRTM)
+- [Cloud Calculator Link 2](https://cloud.google.com/products/calculator/estimate-preview/CiRhYjlhYWI1Ny0zZmRhLTQyMzUtODk2OS03MDI1ODFkODY3NzgQAg==?hl=en)
+
+### Services & Costs:
+- **Grafana** (Google Cloud Run) - On-demand, pay-per-use pricing
+- **Kafka/Zookeeper/Kafka Exporter** (Google Compute Engine) - Requires at least **2 vCPUs and 4GB+ RAM** for small workloads
+- **Recommended Instance:** `c2-standard-4` (4 vCPUs, 16GB RAM) → **$26.60/month (730 hours)**
+
+### Grafana Access:
+- **URL:** [Grafana Service](https://grafana-service-946555989276.europe-central2.run.app/login)
+- **Credentials:** `admin/synthapse`
+
+Cloud Run Pricing Examples: [Cloud Run Pricing](https://cloud.google.com/run/pricing)
 
 ---
 
-## 5. Project Deployment
-
-This project contains multiple microservices and can be deployed via Docker or Kubernetes.
-
-### Installation:
+## Google Cloud Configuration
 
 ```bash
-pip install -r requirements.txt
+gcloud config set project cognispace
+gcloud config set account coginspace@cognispace.iam.gserviceaccount.com
+
+# Assign IAM permissions to Kafka
+gcloud artifacts repositories add-iam-policy-binding kafka \  
+  --location=europe-central2 \  
+  --project=voicesense \  
+  --member="allUsers" \  
+  --role="roles/artifactregistry.writer"
 ```
 
-### 5G Network Optimization Dataset:
+---
 
-- **Schema:** id, scenario, description, label, estimated\_throughput\_increase
-- [Dataset on Hugging Face](https://huggingface.co/datasets/infinite-dataset-hub/5GNetworkOptimization?row=44)
+## 5G Network Optimization Dataset
 
-### Environment Setup:
+- **Schema:** `id`, `scenario`, `description`, `label`, `estimated_throughput_increase`
+- **Dataset:** [Hugging Face Link](https://huggingface.co/datasets/infinite-dataset-hub/5GNetworkOptimization?row=44)
+
+### Environment Setup
 
 ```bash
 export DJANGO_SETTINGS_MODULE=Network.settings
+pip install -r requirements.txt
 ```
 
 ---
@@ -121,10 +81,10 @@ export DJANGO_SETTINGS_MODULE=Network.settings
 
 ### SARIMA (Seasonal Autoregressive Integrated Moving Average)
 
-- [Guide](https://machinelearningmastery.com/sarima-for-time-series-forecasting-in-python/)
-- [Colab Notebook](https://colab.research.google.com/drive/1MGkMvDWOphm4Iyn8Kwq-_I2LyH07Khv9?usp=sharing#scrollTo=pSjoPXIHn2P7)
+- **Guide:** [SARIMA Guide](https://machinelearningmastery.com/sarima-for-time-series-forecasting-in-python/)
+- **Colab Notebook:** [Google Colab Link](https://colab.research.google.com/drive/1MGkMvDWOphm4Iyn8Kwq-_I2LyH07Khv9?usp=sharing#scrollTo=pSjoPXIHn2P7)
 
-### Run in Debug Mode:
+### Debug Mode:
 
 ```bash
 python3 -m pdb main.py
@@ -132,21 +92,12 @@ python3 -m pdb main.py
 
 ---
 
-## 7. Graph Neural Networks (GNN)
-
-- **Training model for network distribution**
-- **Seeding every node in the graph with real internet data**
-- **Data Streaming with Kafka** for real-time communication between nodes
-- **Each node acts as both producer and consumer**, reporting current usage at intervals (1 month, 1 week, 1 hour, 1 minute)
-
----
-
-## 8. Kafka Broker
+## 8. Kafka Broker Setup
 
 ### Local Setup:
 
-1. **Download Kafka** ([Official Apache Kafka Download](https://kafka.apache.org/downloads))
-2. **Start ZooKeeper (for distributed coordination):**
+1. **Download Kafka:** [Apache Kafka](https://kafka.apache.org/downloads)
+2. **Start ZooKeeper:**
    ```bash
    cd kafka_2.12-3.9.0
    bin/zookeeper-server-start.sh config/zookeeper.properties
@@ -157,29 +108,24 @@ python3 -m pdb main.py
    ```
 
 ### Stopping Kafka:
-
 ```bash
-rm -rf /tmp/zookeeper
-rm -rf /tmp/kafka-logs
+rm -rf /tmp/zookeeper /tmp/kafka-logs
 bin/kafka-server-stop.sh
 bin/zookeeper-server-stop.sh
 ```
 
 ### Kafka Cleanup:
-
 ```bash
 lsof -i :9092
 kill -9 <PID>
 ```
 
 ### Checking Topics:
-
 ```bash
 bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
 ```
 
-### Delete All Topics:
-
+### Deleting All Topics:
 ```bash
 for topic in $(bin/kafka-topics.sh --bootstrap-server localhost:9092 --list); do
     bin/kafka-topics.sh --bootstrap-server localhost:9092 --topic $topic --delete;
@@ -187,20 +133,11 @@ done
 ```
 
 ### Kafka Consumer Groups:
-
 ```bash
 kafka-consumer-groups.sh --bootstrap-server localhost:9092 --list
 ```
 
-### Sample Node Communication:
-
-```log
-Node Kathmandu sent message to Node <ISP.NetworkPoint.NetworkPoint object at 0x108f14310>: Hello, neighbor!
-Sending message to <ISP.NetworkPoint.NetworkPoint object at 0x1009349b0>
-```
-
 ### Messages from Beginning:
-
 ```bash
 bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic node_Gandaki_messages --from-beginning
 ```
@@ -210,11 +147,9 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic node_Gan
 ## 9. Monitoring & Logging
 
 ### Kafka UI:
-
 - **Logs with Prometheus/Grafana** (To be confirmed)
 
 ### Installation:
-
 ```bash
 brew install confluentinc/tap/ccloud-cli
 brew install confluentinc/tap/confluent-platform
@@ -222,33 +157,23 @@ brew install prometheus
 ```
 
 ### Running Prometheus:
-
 ```bash
-prometheus --config.file=prometheus-2.31.2.linux-amd64/prometheus.yml
+prometheus --config.file=prometheus.yml
 ```
-
-- **Prometheus UI:** [http://localhost:9090/query](http://localhost:9090/query)
+- **UI:** [http://localhost:9090/query](http://localhost:9090/query)
 
 ### Running Kafka Exporter:
-
 ```bash
 docker run -ti --rm -p 9308:9308 danielqsj/kafka-exporter --kafka.server=host.docker.internal:9092
 ```
-
-- **Kafka Exporter Metrics:** [http://localhost:9308/metrics](http://localhost:9308/metrics)
+- **Metrics:** [http://localhost:9308/metrics](http://localhost:9308/metrics)
 
 ### Running Grafana:
-
 ```bash
 brew install grafana
 brew services start grafana
 ```
-
-- **Grafana UI:** [http://localhost:3000](http://localhost:3000)
+- **UI:** [http://localhost:3000](http://localhost:3000)
 
 ---
-
-## 10. Additional Resources
-
-- **AI Hackathon Data:** [Notion Page](https://balanced-airmail-b72.notion.site/AI-Hackhathon-181529bf8e08803db16acb72d0f899ef?pvs=74)
 
