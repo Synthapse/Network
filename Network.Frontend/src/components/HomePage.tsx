@@ -13,9 +13,12 @@ import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/firebase";
 
 export default function HomePage() {
-  const signInWithGoogle = async () => {
+
+  const signInWithGoogle = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     try {
-      await signInWithPopup(auth, googleProvider);
+      event.preventDefault();
+      const credentials = await signInWithPopup(auth, googleProvider);
+      console.log(credentials)
     } catch (err) {
       console.error(err);
     }
@@ -35,7 +38,7 @@ export default function HomePage() {
       <div className="flex gap-4">
         <a
           href=""
-          onClick={() => signInWithGoogle()}
+          onClick={(e) => signInWithGoogle(e)}
           className={buttonVariants()}
         >
           <Icons.google
@@ -43,7 +46,6 @@ export default function HomePage() {
             className="h-5 w-5 fill-current"
           />{" "}
           Sign up with Google
-        </a>
         <a
           href={siteConfig.links.github}
           className={buttonVariants({ variant: "outline" })}
