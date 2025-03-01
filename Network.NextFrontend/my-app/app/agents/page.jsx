@@ -6,10 +6,11 @@ import {
   Card,
   CardHeader,
   CardTitle,
-  CardContent,
+  CardContent, 
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Progress } from "@/components/ui/progress";
+import { Progress } from "@/components/ui/progress"; 
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Chart } from "react-chartjs-2";
