@@ -1,4 +1,4 @@
-import { siteConfig } from "@/config/site";
+import React, { useState } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import iot from "./iot.png";
 import AgentsImg from "../assets/agent1.png";
@@ -15,10 +15,16 @@ import { auth, googleProvider } from "@/firebase";
 
 export default function HomePage() {
 
+  const [isUserAuth, setIsUserAuth] = useState(false);
+  const [credentials, setCredentials] = useState(null);
+
   const signInWithGoogle = async (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
     try {
       event.preventDefault();
       const credentials = await signInWithPopup(auth, googleProvider);
+      setCredentials(credentials)
+      setIsUserAuth(true)
+
       console.log(credentials)
     } catch (err) {
       console.error(err);
@@ -37,17 +43,27 @@ export default function HomePage() {
         </p>
       </div>
       <div className="flex gap-4">
-        <a
-          href=""
-          onClick={(e) => signInWithGoogle(e)}
-          className={buttonVariants()}
-        >
-          <Icons.google
-            style={{ marginRight: 10 }}
-            className="h-5 w-5 fill-current"
-          />{" "}
-          Sign up with Google
-        </a>
+        {isUserAuth
+          ?
+          <>Welcome {credentials?.user?.displayName} <a
+            href="/agents"
+            className={buttonVariants()}
+          >
+            Try demo
+          </a></>
+          :
+          <a
+            href=""
+            onClick={(e) => signInWithGoogle(e)}
+            className={buttonVariants()}
+          >
+            <Icons.google
+              style={{ marginRight: 10 }}
+              className="h-5 w-5 fill-current"
+            />{" "}
+            Sign up with Google To try demo
+          </a>
+        }
       </div>
       <img src={iot} />
       <div className="flex flex-wrap md:flex-nowrap justify-between items-center mt-9 gap-4">

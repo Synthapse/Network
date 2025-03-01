@@ -4,6 +4,10 @@
             "streamId": "",
             "measurementId": ""
         },
+        "RaportingAPI": {
+            "url": "http://localhost:8000/",
+            "isProduction": true
+        },
         "Firebase": {
             "apiKey": "AIzaSyCsNmlCJJMBohSqrLFs1itcf0CIu3u-4ic",
             "authDomain": "cognispace.firebaseapp.com",
@@ -14,4 +18,4 @@
             "measurementId": "G-R8MG7V24XD"
         }
     }
-}   
+}
