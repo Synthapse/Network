@@ -9,9 +9,9 @@ const Routing: React.FC = () => {
     <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="contact" element={<Contact />} />
-        <Route path="london" element={<London />} />
-        <Route path="agents" element={<Agents />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/london" element={<London />} />
+        <Route path="/agents" element={<Agents />} />
         {/* <Route path="*" element={<PageNotFound />} /> */}
       </Routes>
     </HashRouter>
