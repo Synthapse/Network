@@ -13,7 +13,6 @@ https://www.projectguideline.com/visualizing-ns-3-simulation-using-netanim/
 
 **Simulate point-to point in TCP/IP**
 
-
 - MaxPackets (1)
 - Interval (1.0)
 - PacketSize (1024)

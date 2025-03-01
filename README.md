@@ -16,6 +16,10 @@ Develop AI-driven tools to improve decentralized network performance and scalabi
 - **Load Balancing in Networks** (GNN helps ACO/PSO balance traffic)
 - **Autonomous Drone-Based Signal Boosting** (ACO finds best signal relay points)
 
+## Medium Scale
+- **Network Point (NP)**
+- **Access Point (AP)**
+
 ## Micro Scale (Individual Nodes)
 - **ns3 Simulations**
 

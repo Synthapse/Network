@@ -25,7 +25,7 @@ def is_valid_json(message_value):
 
 # Each node can be a Kafka producer (sending messages) and consumer (receiving messages)
 class NetworkPoint:
-    def __init__(self, id, mb_usage_last_quarter, mb_available, bandwidth, latency, is_5g_enabled=False, mb_usage_last_two_quarter=0, mb_usage_last_three_quarter = 0):
+    def __init__(self, id, mb_available, bandwidth, latency, is_5g_enabled=False):
         """
         Initialize the NetworkPoint with essential properties.
 
@@ -35,10 +35,6 @@ class NetworkPoint:
         """
 
         self.id = id
-        # redefine if those data per node is ok
-        self.mb_usage_last_three_quarter = mb_usage_last_three_quarter # 30-45 minutes ago
-        self.mb_usage_last_two_quarter = mb_usage_last_two_quarter # 15-30 minutes ago
-        self.mb_usage_last_quarter = mb_usage_last_quarter  # 0-15 minutes ago
         self.mb_available = mb_available
         self.bandwidth = bandwidth  # Bandwidth in Mbps
         self.latency = latency  # Latency in ms
@@ -195,16 +191,6 @@ class NetworkPoint:
         """
         if neighbor not in self.neighbors:
             self.neighbors.append(neighbor)
-
-    def get_info(self):
-        """
-        Get a summary of the node's properties.
-
-        :return: A string summary of the node's properties.
-        """
-        return f"Data Usage = {self.mb_usage_last_quarter} MB, Available Data[MB] = {self.mb_available} Bandwidth = {self.bandwidth} Mbps, " \
-               f"Latency = {self.latency} ms, Neighbors = {len(self.neighbors)}"
-
     def update_usage(self, additional_usage):
         """
         Update the data usage for this node.
