@@ -5,7 +5,6 @@ import HomePage from "./pages/Home";
 function App() {
   return (
     <Layout>
-      <HomePage />
       <Routing/>
     </Layout>
   );
