@@ -32,6 +32,8 @@
     "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
+    "@radix-ui/react-progress": "^1.0.2",
+    "@radix-ui/react-select": "^1.0.2",
     "eslint": "^9.0.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
