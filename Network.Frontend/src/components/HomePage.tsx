@@ -11,6 +11,7 @@ import img3 from "../assets/image 592.png";
 import { Icons } from "./icons";
 import { signInWithPopup } from "firebase/auth";
 import { auth, googleProvider } from "@/firebase";
+import { Link } from "react-router-dom";
 
 
 export default function HomePage() {
@@ -45,12 +46,14 @@ export default function HomePage() {
       <div className="flex gap-4">
         {isUserAuth
           ?
-          <>Welcome {credentials?.user?.displayName} <a
-            href="/agents"
-            className={buttonVariants()}
-          >
-            Try demo
-          </a></>
+          <>Welcome {credentials?.user?.displayName}
+            <Link
+              to="/agents"
+              className={buttonVariants()}
+            >
+              Try demo
+            </Link>
+          </>
           :
           <div>
             <a
