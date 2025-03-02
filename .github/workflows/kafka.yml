@@ -1,73 +1,73 @@
-name: Deploy Kafka to GCE
+# name: Deploy Kafka to GCE
 
-on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+# on:
+#   push:
+#     branches:
+#       - main
+#   workflow_dispatch:
 
-env:
-  PROJECT_ID: cognispace
-  REGION: europe-central2
-  ZONE: europe-central2-a
-  VM_NAME: kafka-vm
+# env:
+#   PROJECT_ID: cognispace
+#   REGION: europe-central2
+#   ZONE: europe-central2-a
+#   VM_NAME: kafka-vm
 
-jobs:
-  deploy:
-    permissions:
-      contents: 'read'
-      id-token: 'write'
+# jobs:
+#   deploy:
+#     permissions:
+#       contents: 'read'
+#       id-token: 'write'
 
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v2
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v2
 
-      - name: Google Auth
-        id: 'auth'
-        uses: 'google-github-actions/auth@v1'
-        with:
-          credentials_json: '${{ secrets.GCP_SA_KEY }}'
+#       - name: Google Auth
+#         id: 'auth'
+#         uses: 'google-github-actions/auth@v1'
+#         with:
+#           credentials_json: '${{ secrets.GCP_SA_KEY }}'
 
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v1'
+#       - name: 'Set up Cloud SDK'
+#         uses: 'google-github-actions/setup-gcloud@v1'
 
-      - name: 'Use gcloud CLI'
-        run: 'gcloud info'
+#       - name: 'Use gcloud CLI'
+#         run: 'gcloud info'
 
-      - name: 'Create GCE VM for Kafka'
-        run: |-
-          gcloud compute instances create $VM_NAME \
-            --project=$PROJECT_ID \
-            --zone=$ZONE \
-            --machine-type=e2-standard-2 \
-            --image=debian-11-bullseye-v20250212 \
-            --image-project=debian-cloud \
-            --boot-disk-size=50GB \
-            --tags=kafka-server \
-            --metadata=startup-script='#!/bin/bash
-            sudo apt update
-            sudo apt install -y docker.io
-            sudo systemctl start docker
-            sudo systemctl enable docker
+#       - name: 'Create GCE VM for Kafka'
+#         run: |-
+#           gcloud compute instances create $VM_NAME \
+#             --project=$PROJECT_ID \
+#             --zone=$ZONE \
+#             --machine-type=e2-standard-2 \
+#             --image=debian-11-bullseye-v20250212 \
+#             --image-project=debian-cloud \
+#             --boot-disk-size=50GB \
+#             --tags=kafka-server \
+#             --metadata=startup-script='#!/bin/bash
+#             sudo apt update
+#             sudo apt install -y docker.io
+#             sudo systemctl start docker
+#             sudo systemctl enable docker
             
-            # Create a Docker network for Kafka and Zookeeper
-            sudo docker network create kafka-net
+#             # Create a Docker network for Kafka and Zookeeper
+#             sudo docker network create kafka-net
             
-            # Start Zookeeper container
-            sudo docker run -d --network=kafka-net --name zookeeper -p 2181:2181 confluentinc/cp-zookeeper:latest
+#             # Start Zookeeper container
+#             sudo docker run -d --network=kafka-net --name zookeeper -p 2181:2181 confluentinc/cp-zookeeper:latest
             
-            # Start Kafka container
-            sudo docker run -d --network=kafka-net --name kafka -p 9092:9092 \
-            -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
-            -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$(curl -s ifconfig.me):9092 \
-            confluentinc/cp-kafka:latest
+#             # Start Kafka container
+#             sudo docker run -d --network=kafka-net --name kafka -p 9092:9092 \
+#             -e KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181 \
+#             -e KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://$(curl -s ifconfig.me):9092 \
+#             confluentinc/cp-kafka:latest
             
-            # Start Kafka Exporter container
-            sudo docker run -d --network=kafka-net --name kafka-exporter -p 9308:9308 \
-            -e KAFKA_SERVER=kafka:9092 \
-            danielqsj/kafka-exporter:latest'
+#             # Start Kafka Exporter container
+#             sudo docker run -d --network=kafka-net --name kafka-exporter -p 9308:9308 \
+#             -e KAFKA_SERVER=kafka:9092 \
+#             danielqsj/kafka-exporter:latest'
 
-      - name: Verify Kafka Deployment
-        run: |-
-          gcloud compute ssh $VM_NAME --zone=$ZONE --command="docker ps"
+#       - name: Verify Kafka Deployment
+#         run: |-
+#           gcloud compute ssh $VM_NAME --zone=$ZONE --command="docker ps"
