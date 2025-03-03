@@ -9,6 +9,8 @@ Develop AI-driven tools to improve decentralized network performance and scalabi
 4. **Network.Backend**
 
 ## Macro Scale (Entire Network)
+
+For AI Agents, which communicate with themselves (AI talk with AI)
 - **Particle Swarm Optimization (PSO)**
 - **Ant Colony Optimization (ACO)**
 - **Optimizing WiFi Tower Placement** (PSO + GNN)
@@ -81,7 +83,7 @@ pip install -r requirements.txt
 
 ---
 
-## 6. Time Series Predictive Algorithm
+## Time Series Predictive Algorithm
 
 ### SARIMA (Seasonal Autoregressive Integrated Moving Average)
 
@@ -96,7 +98,7 @@ python3 -m pdb main.py
 
 ---
 
-## 8. Kafka Broker Setup
+## Kafka Broker Setup
 
 ### Local Setup:
 
@@ -148,7 +150,7 @@ bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic node_Gan
 
 ---
 
-## 9. Monitoring & Logging
+## Monitoring & Logging
 
 ### Kafka UI:
 - **Logs with Prometheus/Grafana** (To be confirmed)

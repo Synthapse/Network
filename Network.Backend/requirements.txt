@@ -1,1 +1,7 @@
 pybind11
+fastapi
+uvicorn
+openai
+redis
+pydantic
+asyncio

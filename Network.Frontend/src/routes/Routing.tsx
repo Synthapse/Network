@@ -7,13 +7,13 @@ import { Routes, Route } from "react-router-dom";
 const Routing: React.FC = () => {
   return (
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/london" element={<London />} />
-        <Route path="/agents" element={<Agents />} />
-        {/* <Route path="*" element={<PageNotFound />} /> */}
-      </Routes>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/contact" element={<Contact />} />
+      <Route path="/london" element={<London />} />
+      <Route path="/agents" element={<Agents />} />
+      {/* <Route path="*" element={<PageNotFound />} /> */}
+    </Routes>
   );
 };
 
