@@ -1,3 +1,35 @@
+
+## 1. Coordination Backend
+
+Should it be separate microservice?
+`
+brew install redis
+
+`
+redis-server
+`
+
+`
+redis-cli
+`
+
+`
+KEYS *
+`
+`
+
+`
+GET cyb1_response
+`
+
+`
+openai migrate
+`
+
+`
+uvicorn main:app --reload
+`
+
 ## 1. Network Protocols
 
 

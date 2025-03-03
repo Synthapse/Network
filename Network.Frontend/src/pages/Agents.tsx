@@ -2,7 +2,7 @@
 //01.03.2025 - quite bad, but it's hackhathon... and prototype needs to be deliver fast
 "use client";
 //import { NextResponse } from "next/server";
-import OpenAI from "openai";
+// import OpenAI from "openai";
 import axios from "axios";
 import { useState, useEffect, useRef } from "react";
 import {
@@ -19,11 +19,12 @@ import { Chart } from "react-chartjs-2";
 import img from "../assets/agent1.png";
 import { Send } from "lucide-react";
 
-const client = new OpenAI({
-  //https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
-  apiKey: "xai-cqEQdzQnn1lM04QasIuIxumn4NchsmhT9wYqzDc3qfIpx3IdjTVm0JUciiMEF3N4rwm7Jc5oZT8azev9", dangerouslyAllowBrowser: true,
-  baseURL: "https://api.x.ai/v1",
-});
+// const client = new OpenAI({
+//   //https://help.openai.com/en/articles/5112595-best-practices-for-api-key-safety
+//   apiKey: "", dangerouslyAllowBrowser: true,
+//   baseURL: "https://api.x.ai/v1",
+// });
+
 
 export default function Home() {
 
@@ -233,7 +234,12 @@ export default function Home() {
 
 
     // Call to GROK
-    const grokResponse = await requestLLms();
+    //const grokResponse = await requestLLms();
+
+    // BACKEND CALL
+    const response = 
+
+
     // Call to Raporting
     const raportResponse = await requestRaporting();
 
